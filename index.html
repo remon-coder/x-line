@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080b12">
-  <meta name="description" content="اختر تصميم ورق الحائط، أدخل مقاس الحائط، واعرف السعر مع الشحن المجاني من X LINE">
   <title>X LINE | ورق حائط حسب المقاس</title>
 
   <style>
@@ -12,183 +11,134 @@
       --blue: #55b9ff;
       --bg: #080b12;
       --card: #111722;
-      --card2: #161e2b;
       --text: #f7fbff;
       --muted: #aeb8c7;
-      --line: rgba(255,255,255,.1);
+      --line: rgba(255,255,255,.12);
       --green: #65df9e;
-      --radius: 18px;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
     [hidden] { display: none !important; }
 
     body {
       margin: 0;
-      overflow-x: hidden;
       color: var(--text);
+      background: var(--bg);
       font-family: "Segoe UI", Tahoma, Arial, sans-serif;
-      background:
-        radial-gradient(circle at 78% 8%, rgba(64,155,255,.13), transparent 25rem),
-        radial-gradient(circle at 15% 32%, rgba(64,155,255,.07), transparent 20rem),
-        var(--bg);
     }
 
-    button, input { font: inherit; }
-    button, a { -webkit-tap-highlight-color: transparent; }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
-    button { color: inherit; }
+    button, input { font: inherit; }
+    .container { width: min(1180px, calc(100% - 28px)); margin-inline: auto; }
 
-    .container { width: min(1180px, calc(100% - 32px)); margin-inline: auto; }
-
-    .nav {
+    header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: rgba(8,11,18,.94);
-      backdrop-filter: blur(16px);
+      z-index: 10;
+      background: rgba(8,11,18,.96);
       border-bottom: 1px solid var(--line);
     }
 
-    .nav-inner {
-      min-height: 70px;
+    .nav {
+      min-height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 11px;
-      font-size: 21px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      white-space: nowrap;
-    }
-
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 21px; font-weight: 900; }
     .brand-mark {
       display: grid;
       place-items: center;
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       border-radius: 12px;
       color: #06101c;
       background: linear-gradient(135deg, #72caff, #278fff);
-      box-shadow: 0 10px 30px rgba(67,176,255,.22);
     }
 
-    .nav-links, .nav-actions { display: flex; align-items: center; gap: 15px; }
-    .nav-links { color: var(--muted); font-size: 14px; }
+    .nav-links { display: flex; gap: 18px; color: var(--muted); font-size: 14px; }
     .nav-links a:hover { color: var(--blue); }
 
-    .icon-btn {
-      width: 42px;
-      height: 42px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--card);
-      cursor: pointer;
-    }
-
     .hero {
-      min-height: 520px;
+      min-height: 480px;
       display: grid;
-      grid-template-columns: 1fr 1.05fr;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-      gap: 38px;
-      padding-block: 55px;
+      gap: 32px;
+      padding-block: 48px;
     }
 
     .eyebrow {
       display: inline-block;
-      padding: 9px 13px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border: 1px solid rgba(85,185,255,.25);
+      border-radius: 30px;
       color: var(--blue);
       background: rgba(85,185,255,.08);
-      border: 1px solid rgba(85,185,255,.18);
-      border-radius: 999px;
-      font-weight: 800;
     }
 
-    h1 { margin: 0 0 16px; font-size: clamp(40px, 6vw, 68px); line-height: 1.08; }
-    .blue-text { color: var(--blue); }
-
+    h1 { margin: 0 0 15px; font-size: clamp(38px, 6vw, 66px); line-height: 1.1; }
+    .blue { color: var(--blue); }
     .hero p, .muted { color: var(--muted); line-height: 1.8; }
-    .hero p { max-width: 580px; font-size: 17px; }
-
-    .price-line { display: flex; align-items: baseline; gap: 10px; margin: 22px 0; }
+    .hero p { font-size: 17px; }
+    .price-line { display: flex; gap: 10px; align-items: baseline; margin: 22px 0; }
     .price-line strong { font-size: 30px; }
     .price-line span { color: var(--muted); }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
     .btn {
-      min-height: 47px;
+      min-height: 46px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0 17px;
+      padding: 0 16px;
       border: 0;
-      border-radius: 12px;
+      border-radius: 11px;
       font-weight: 800;
       cursor: pointer;
     }
 
-    .btn-primary {
-      color: #06101c;
-      background: linear-gradient(135deg, #72caff, #278fff);
-    }
-
-    .btn-secondary { background: var(--card); border: 1px solid var(--line); }
+    .primary { color: #06101c; background: linear-gradient(135deg, #72caff, #278fff); }
+    .secondary { border: 1px solid var(--line); background: var(--card); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
     .hero-image {
-      position: relative;
-      height: 390px;
+      height: 360px;
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 24px;
+      border-radius: 22px;
       background: var(--card);
     }
 
     .hero-image img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-badge {
-      position: absolute;
-      right: 16px;
-      bottom: 16px;
-      padding: 13px 15px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(8,11,18,.88);
-    }
 
-    .section { padding-block: 48px; }
-    .section-head { margin-bottom: 22px; }
-    .section-head h2 { margin: 0 0 7px; font-size: clamp(28px, 4vw, 40px); }
-    .section-head p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .section { padding-block: 42px; }
+    .section-title { margin: 0 0 8px; font-size: clamp(28px, 4vw, 40px); }
+    .section-description { margin: 0 0 20px; color: var(--muted); line-height: 1.7; }
 
     .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 
     .category-card {
       position: relative;
-      display: block;
       height: 180px;
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: 16px;
       background: var(--card);
     }
 
-    .category-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
+    .category-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
     .category-card:hover img { transform: scale(1.06); }
 
     .category-card::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(transparent 25%, rgba(3,6,10,.88));
+      background: linear-gradient(transparent 25%, rgba(0,0,0,.8));
     }
 
     .category-card span {
@@ -200,51 +150,50 @@
       font-weight: 900;
     }
 
-    .category-page { min-height: 70vh; padding-block: 36px 65px; }
+    .category-page { min-height: 70vh; padding-block: 34px 60px; }
 
-    .category-page-top {
+    .page-top {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 15px;
       margin-bottom: 22px;
     }
 
-    .category-page h1 { margin: 0 0 7px; font-size: clamp(30px, 5vw, 44px); }
-    .category-page-intro { margin: 0; color: var(--muted); line-height: 1.7; }
+    .page-top h1 { margin: 0 0 6px; font-size: clamp(30px, 5vw, 44px); }
+    .page-top p { margin: 0; color: var(--muted); line-height: 1.7; }
 
-    .back-link {
-      min-height: 43px;
+    .back {
       display: inline-flex;
       align-items: center;
-      padding: 0 14px;
+      min-height: 42px;
+      padding: 0 13px;
       border: 1px solid var(--line);
-      border-radius: 11px;
-      background: var(--card);
+      border-radius: 10px;
       white-space: nowrap;
     }
 
-    .catalog-panel {
-      padding: 18px;
+    .panel {
+      padding: 17px;
       border: 1px solid var(--line);
-      border-radius: 20px;
-      background: rgba(17,23,34,.78);
+      border-radius: 18px;
+      background: rgba(17,23,34,.8);
     }
 
-    .catalog-toolbar {
+    .toolbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 14px;
       margin-bottom: 17px;
     }
 
-    .catalog-toolbar h2 { margin: 0 0 5px; font-size: 22px; }
-    .catalog-toolbar p { margin: 0; color: var(--muted); font-size: 14px; }
+    .toolbar h2 { margin: 0 0 5px; font-size: 22px; }
+    .toolbar p { margin: 0; color: var(--muted); font-size: 14px; }
 
-    .search-input {
-      width: min(300px, 100%);
-      height: 43px;
+    .search {
+      width: min(290px, 100%);
+      height: 42px;
       padding: 0 12px;
       border: 1px solid var(--line);
       border-radius: 10px;
@@ -253,553 +202,378 @@
       background: #0b1018;
     }
 
-    .search-input:focus { border-color: var(--blue); }
-    .products { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px; }
-
-    .product-card {
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      background: var(--card);
-    }
-
-    .product-image { height: 215px; background: var(--card2); }
+    .products { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 13px; }
+    .product { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+    .product-image { height: 210px; background: #182130; }
     .product-image img { width: 100%; height: 100%; object-fit: cover; }
     .product-info { padding: 12px; }
-    .product-info h3 { margin: 0 0 11px; font-size: 16px; }
-
-    .product-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
+    .product-info h3 { margin: 0 0 10px; font-size: 16px; }
+    .product-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
     .product-price { color: var(--blue); font-size: 14px; font-weight: 900; }
-    .select-design {
-      min-height: 36px;
+    .choose {
       display: inline-flex;
+      min-height: 35px;
       align-items: center;
       justify-content: center;
       padding: 0 10px;
-      border: 1px solid rgba(85,185,255,.28);
+      border: 1px solid rgba(85,185,255,.3);
       border-radius: 9px;
       color: var(--blue);
       background: rgba(85,185,255,.08);
       white-space: nowrap;
     }
 
-    .empty-state { grid-column: 1 / -1; padding: 25px; color: var(--muted); text-align: center; }
+    .empty { grid-column: 1/-1; padding: 25px; color: var(--muted); text-align: center; }
 
     .calculator {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
-      padding: 20px;
+      padding: 18px;
       border: 1px solid var(--line);
-      border-radius: 20px;
+      border-radius: 18px;
       background: var(--card);
     }
 
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .field label { display: block; margin-bottom: 7px; color: var(--muted); font-size: 14px; }
-
     .field input {
       width: 100%;
-      height: 48px;
-      padding: 0 12px;
+      height: 46px;
+      padding: 0 11px;
       border: 1px solid var(--line);
-      border-radius: 10px;
-      outline: none;
+      border-radius: 9px;
       color: var(--text);
       background: #0b1018;
     }
 
-    .upload-box {
-      min-height: 115px;
-      display: grid;
-      place-items: center;
-      margin-top: 13px;
-      padding: 15px;
-      border: 1px dashed rgba(85,185,255,.42);
-      border-radius: 13px;
-      color: var(--muted);
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .upload-box input { display: none; }
-    .upload-preview { display: none; max-width: 100%; max-height: 200px; margin-top: 10px; border-radius: 10px; }
-
-    .summary { padding: 15px; border: 1px solid var(--line); border-radius: 14px; background: #0a0e15; }
+    .summary { padding: 14px; border: 1px solid var(--line); border-radius: 13px; background: #0a0e15; }
     .summary-row { display: flex; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
     .summary-row strong { color: var(--text); }
-    .summary-row.total { border: 0; color: var(--text); font-size: 18px; font-weight: 900; }
+    .summary-row.total { border: 0; color: var(--text); font-weight: 900; font-size: 18px; }
     .summary-row.total strong { color: var(--blue); font-size: 23px; }
-    .discount-note { display: none; padding: 9px; color: var(--green); }
-    .selected-design { margin: 12px 0; color: var(--muted); font-size: 14px; }
-    .selected-design strong { color: var(--blue); }
+    .selected { margin: 13px 0; color: var(--muted); font-size: 14px; }
+    .selected strong { color: var(--blue); }
+    .upload { display: block; margin-top: 12px; padding: 18px; border: 1px dashed var(--blue); border-radius: 12px; color: var(--muted); text-align: center; cursor: pointer; }
+    .upload input { display: none; }
+    #preview { display: none; max-width: 100%; max-height: 200px; margin-top: 10px; border-radius: 10px; }
 
-    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .step { padding: 17px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+    .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+    .step { padding: 16px; border: 1px solid var(--line); border-radius: 13px; background: var(--card); }
     .step h3 { margin: 0 0 7px; }
-    .step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .step p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 14px; }
 
-    .faq { display: grid; grid-template-columns: .8fr 1.2fr; gap: 22px; }
-    .faq-intro p { color: var(--muted); line-height: 1.8; }
-    details { margin-bottom: 9px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+    .faq { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    details { margin-bottom: 9px; border: 1px solid var(--line); border-radius: 11px; background: var(--card); }
     summary { padding: 14px; cursor: pointer; font-weight: 800; }
-    details p { margin: 0; padding: 0 14px 14px; color: var(--muted); line-height: 1.8; }
+    details p { margin: 0; padding: 0 14px 14px; color: var(--muted); line-height: 1.7; }
 
-    .cta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-block: 25px 50px;
-      padding: 24px;
-      border: 1px solid rgba(85,185,255,.2);
-      border-radius: 20px;
-      background: rgba(85,185,255,.08);
-    }
-
-    .cta h2 { margin: 0 0 6px; }
-    .cta p { margin: 0; color: var(--muted); }
     footer { padding: 22px 0; border-top: 1px solid var(--line); color: var(--muted); }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
-
+    .footer-row { display: flex; justify-content: space-between; gap: 15px; }
     .whatsapp {
       position: fixed;
-      z-index: 30;
-      left: 18px;
-      bottom: 18px;
-      width: 54px;
-      height: 54px;
+      left: 17px;
+      bottom: 17px;
+      z-index: 5;
+      width: 52px;
+      height: 52px;
       display: grid;
       place-items: center;
       border-radius: 50%;
       color: white;
       background: #20c86a;
-      font-size: 23px;
+      font-size: 22px;
     }
 
-    .modal {
-      position: fixed;
-      z-index: 60;
-      inset: 0;
-      display: none;
-      place-items: center;
-      padding: 16px;
-      background: rgba(0,0,0,.78);
-    }
-
-    .modal.open { display: grid; }
-    .modal-card { width: min(700px, 100%); max-height: 90vh; overflow: auto; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
-    .modal-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .modal-head h2 { margin: 0; }
-    .close-btn { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 9px; background: #0a0e15; cursor: pointer; }
-    .guide-list { display: grid; gap: 10px; }
-    .guide-step { padding: 12px; border: 1px solid var(--line); border-radius: 11px; }
-    .guide-step h3 { margin: 0 0 6px; color: var(--blue); }
-    .guide-step p { margin: 0; color: var(--muted); line-height: 1.7; }
-
-    @media (max-width: 900px) {
+    @media (max-width: 850px) {
       .nav-links { display: none; }
       .hero { grid-template-columns: 1fr; }
-      .category-grid { grid-template-columns: repeat(3, 1fr); }
-      .products { grid-template-columns: repeat(3, 1fr); }
-      .calculator { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: repeat(2, 1fr); }
-      .faq { grid-template-columns: 1fr; }
+      .category-grid { grid-template-columns: repeat(3,1fr); }
+      .products { grid-template-columns: repeat(3,1fr); }
+      .calculator, .faq { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(2,1fr); }
     }
 
-    @media (max-width: 600px) {
-      .container { width: calc(100% - 24px); }
-      .hero { min-height: auto; padding-block: 35px; gap: 22px; }
-      .hero-image { height: 250px; }
-      .hero p { font-size: 15px; }
-      .category-grid { grid-template-columns: repeat(2, 1fr); gap: 9px; }
+    @media (max-width: 560px) {
+      .hero { min-height: auto; padding-block: 32px; }
+      .hero-image { height: 240px; }
+      .category-grid { grid-template-columns: repeat(2,1fr); gap: 9px; }
       .category-card { height: 140px; }
-      .products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .products { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
       .product-image { height: 155px; }
       .product-info { padding: 9px; }
       .product-info h3 { font-size: 14px; }
-      .product-row { align-items: stretch; flex-direction: column; }
-      .select-design { width: 100%; }
-      .catalog-panel { padding: 12px; }
-      .catalog-toolbar, .category-page-top { align-items: stretch; flex-direction: column; }
-      .search-input { width: 100%; }
-      .form-grid { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: 1fr; }
-      .cta, .footer-inner { align-items: stretch; flex-direction: column; }
-      .cta .btn { width: 100%; }
+      .product-row, .toolbar, .page-top, .footer-row { align-items: stretch; flex-direction: column; }
+      .choose, .search { width: 100%; }
+      .panel { padding: 11px; }
+      .fields, .steps { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
-  <header class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="./" aria-label="X LINE الرئيسية">
-        <span class="brand-mark">X</span><span>X LINE</span>
-      </a>
-
-      <nav class="nav-links" aria-label="القائمة الرئيسية">
+  <header>
+    <div class="container nav">
+      <a class="brand" href="./"><span class="brand-mark">X</span><span>X LINE</span></a>
+      <nav class="nav-links">
         <a href="./#categories">الأصناف</a>
         <a href="./#calculator">احسب السعر</a>
         <a href="./#installation">التركيب</a>
         <a href="./#faq">الأسئلة الشائعة</a>
       </nav>
-
-      <div class="nav-actions">
-        <button class="icon-btn" id="searchFocusBtn" title="البحث" aria-label="البحث">⌕</button>
-        <button class="icon-btn" id="guideOpenBtn" title="دليل التركيب" aria-label="دليل التركيب">▤</button>
-      </div>
     </div>
   </header>
 
   <main id="homeView">
     <section class="container hero">
       <div>
-        <div class="eyebrow">◆ طباعة خاصة حسب المقاس</div>
-        <h1>حوّل حائطك إلى <span class="blue-text">لوحة فنية</span></h1>
-        <p>اختَر الصنف الذي يناسبك، تصفح تصميماته، وأدخل مقاس الحائط لمعرفة السعر مباشرة.</p>
+        <div class="eyebrow">طباعة خاصة حسب المقاس</div>
+        <h1>حوّل حائطك إلى <span class="blue">لوحة فنية</span></h1>
+        <p>اختَر الصنف، تصفح تصميماته، وأدخل مقاس الحائط لمعرفة السعر مباشرة.</p>
         <div class="price-line"><strong>450 جنيه</strong><span>للمتر المربع — الشحن مجاني</span></div>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#categories">اختَر الصنف ←</a>
-          <a class="btn btn-secondary" href="#calculator">احسب السعر</a>
+          <a class="btn primary" href="#categories">اختَر الصنف</a>
+          <a class="btn secondary" href="#calculator">احسب السعر</a>
         </div>
       </div>
-
       <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=85" alt="غرفة بتصميم داخلي">
-        <div class="hero-badge"><small>خصم 5٪</small><strong>للطلبات الأكبر من 5 م²</strong></div>
+        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=85" alt="غرفة بتصميم داخلي">
       </div>
     </section>
 
-    <section class="section" id="categories">
-      <div class="container">
-        <div class="section-head">
-          <h2>اختَر الصنف</h2>
-          <p>اضغط على صورة الصنف لفتح صفحة تصاميمه.</p>
-        </div>
-        <div class="category-grid" id="categoryGrid"></div>
-      </div>
+    <section class="container section" id="categories">
+      <h2 class="section-title">اختَر الصنف</h2>
+      <p class="section-description">اضغط على صورة الصنف لفتح صفحة تصاميمه.</p>
+      <div class="category-grid" id="categoryGrid"></div>
     </section>
 
-    <section class="section" id="calculator">
-      <div class="container">
-        <div class="section-head">
-          <h2>احسب مقاس حائطك</h2>
-          <p>أدخل العرض والارتفاع بالسنتيمتر. يطبق خصم 5٪ إذا زادت المساحة عن 5 م².</p>
-        </div>
+    <section class="container section" id="calculator">
+      <h2 class="section-title">احسب مقاس حائطك</h2>
+      <p class="section-description">أدخل العرض والارتفاع بالسنتيمتر. يطبق خصم 5٪ إذا زادت المساحة عن 5 م².</p>
 
-        <div class="calculator">
-          <div>
-            <div class="form-grid">
-              <div class="field">
-                <label for="width">عرض الحائط (سم)</label>
-                <input id="width" type="number" min="1" value="300">
-              </div>
-              <div class="field">
-                <label for="height">ارتفاع الحائط (سم)</label>
-                <input id="height" type="number" min="1" value="250">
-              </div>
-            </div>
-
-            <label class="upload-box" for="roomImage">
-              <div>
-                <strong>＋ ارفع صورة الغرفة أو التصميم</strong>
-                <div style="font-size:13px;margin-top:6px">المعاينة على جهازك فقط.</div>
-              </div>
-              <input id="roomImage" type="file" accept="image/*">
-            </label>
-            <img class="upload-preview" id="uploadPreview" alt="معاينة الصورة">
+      <div class="calculator">
+        <div>
+          <div class="fields">
+            <div class="field"><label for="width">عرض الحائط (سم)</label><input id="width" type="number" min="1" value="300"></div>
+            <div class="field"><label for="height">ارتفاع الحائط (سم)</label><input id="height" type="number" min="1" value="250"></div>
           </div>
+          <label class="upload" for="roomImage">ارفع صورة الغرفة أو التصميم<input id="roomImage" type="file" accept="image/*"></label>
+          <img id="preview" alt="معاينة الصورة">
+        </div>
 
-          <div class="summary">
-            <div class="summary-row"><span>مساحة الحائط</span><strong id="area"></strong></div>
-            <div class="summary-row"><span>السعر قبل الخصم</span><strong id="subtotal"></strong></div>
-            <div class="summary-row"><span>الشحن</span><strong style="color:var(--green)">مجاني</strong></div>
-            <div class="summary-row"><span>الخصم</span><strong id="discount"></strong></div>
-            <div class="discount-note" id="discountNote">تم تطبيق خصم 5٪.</div>
-            <div class="selected-design">التصميم المختار: <strong id="selectedDesign">لم يتم الاختيار بعد</strong></div>
-            <div class="summary-row total"><span>الإجمالي</span><strong id="total"></strong></div>
-            <button class="btn btn-primary" id="orderBtn" style="width:100%">اطلب عبر واتساب</button>
-          </div>
+        <div class="summary">
+          <div class="summary-row"><span>مساحة الحائط</span><strong id="area"></strong></div>
+          <div class="summary-row"><span>السعر قبل الخصم</span><strong id="subtotal"></strong></div>
+          <div class="summary-row"><span>الشحن</span><strong style="color:var(--green)">مجاني</strong></div>
+          <div class="summary-row"><span>الخصم</span><strong id="discount"></strong></div>
+          <div class="selected">التصميم المختار: <strong id="selectedDesign">لم يتم الاختيار بعد</strong></div>
+          <div class="summary-row total"><span>الإجمالي</span><strong id="total"></strong></div>
+          <button class="btn primary" id="orderBtn">اطلب عبر واتساب</button>
         </div>
       </div>
     </section>
 
-    <section class="section" id="installation">
-      <div class="container">
-        <div class="section-head">
-          <h2>كتالوج التركيب</h2>
-          <button class="btn btn-secondary" id="guideOpenBtn2">افتح دليل التركيب</button>
-        </div>
-        <div class="steps">
-          <article class="step"><h3>١. جهّز الحائط</h3><p>نظّف السطح وتأكد أنه جاف ومستوي.</p></article>
-          <article class="step"><h3>٢. راجع الشرائح</h3><p>رتب الشرائح وتأكد من اتجاه التصميم.</p></article>
-          <article class="step"><h3>٣. ابدأ بخط مستقيم</h3><p>حدد خطًا رأسيًا مستقيمًا قبل التركيب.</p></article>
-          <article class="step"><h3>٤. نعّم السطح</h3><p>أخرج الهواء من المنتصف إلى الأطراف.</p></article>
-        </div>
+    <section class="container section" id="installation">
+      <h2 class="section-title">خطوات التركيب</h2>
+      <div class="steps">
+        <article class="step"><h3>١. جهّز الحائط</h3><p>نظّف السطح وتأكد أنه جاف ومستوي.</p></article>
+        <article class="step"><h3>٢. راجع الشرائح</h3><p>رتب الشرائح وتأكد من اتجاه التصميم.</p></article>
+        <article class="step"><h3>٣. ابدأ بخط مستقيم</h3><p>حدد خطًا رأسيًا مستقيمًا قبل التركيب.</p></article>
+        <article class="step"><h3>٤. نعّم السطح</h3><p>أخرج الهواء من المنتصف إلى الأطراف.</p></article>
       </div>
     </section>
 
-    <section class="section" id="faq">
-      <div class="container">
-        <div class="section-head"><h2>أسئلة شائعة</h2></div>
-        <div class="faq">
-          <div class="faq-intro">
-            <h3>تحتاج مساعدة في الطلب؟</h3>
-            <p>تواصل معنا على واتساب للمساعدة في اختيار التصميم أو إدخال المقاس.</p>
-            <a class="btn btn-primary" href="https://wa.me/201208887256" target="_blank" rel="noopener">تواصل مع X LINE</a>
-          </div>
-          <div>
-            <details><summary>كيف يتم حساب السعر؟</summary><p>المساحة بالمتر المربع مضروبة في 450 جنيهًا.</p></details>
-            <details><summary>متى أحصل على الخصم؟</summary><p>يظهر خصم 5٪ عندما تزيد المساحة عن 5 أمتار مربعة.</p></details>
-            <details><summary>هل الشحن مجاني؟</summary><p>نعم، الشحن مجاني حسب تفاصيل الطلب.</p></details>
-            <details><summary>هل توفرون خدمة تركيب؟</summary><p>لا نوفر خدمة تركيب، لكن يوجد دليل إرشادي داخل الموقع.</p></details>
-          </div>
+    <section class="container section" id="faq">
+      <h2 class="section-title">أسئلة شائعة</h2>
+      <div class="faq">
+        <p class="muted">للمساعدة في اختيار التصميم أو إدخال المقاس، تواصل معنا عبر <a href="https://wa.me/201208887256">واتساب</a>.</p>
+        <div>
+          <details><summary>كيف يتم حساب السعر؟</summary><p>المساحة بالمتر المربع مضروبة في 450 جنيهًا.</p></details>
+          <details><summary>متى أحصل على الخصم؟</summary><p>يظهر خصم 5٪ عندما تزيد المساحة عن 5 أمتار مربعة.</p></details>
+          <details><summary>هل الشحن مجاني؟</summary><p>نعم، الشحن مجاني حسب تفاصيل الطلب.</p></details>
         </div>
       </div>
-    </section>
-
-    <section class="container cta">
-      <div><h2>جاهز لتجديد حائطك؟</h2><p>اختَر صنفك وتصميمك، ثم أدخل المقاس.</p></div>
-      <a class="btn btn-primary" href="#categories">ابدأ اختيار التصميم</a>
     </section>
   </main>
 
-  <main id="categoryView" class="category-page" hidden>
-    <div class="container">
-      <div class="category-page-top">
+  <main class="container category-page" id="categoryView" hidden>
+    <div class="page-top">
+      <div>
+        <h1 id="categoryTitle"></h1>
+        <p id="categoryDescription"></p>
+      </div>
+      <a class="back" href="./#categories">← الرجوع للأصناف</a>
+    </div>
+    <div class="panel">
+      <div class="toolbar">
         <div>
-          <h1 id="categoryPageTitle"></h1>
-          <p class="category-page-intro" id="categoryPageDescription"></p>
+          <h2 id="designCount">التصاميم</h2>
+          <p>اختَر التصميم الذي يعجبك.</p>
         </div>
-        <a class="back-link" href="./#categories">← الرجوع للأصناف</a>
+        <input class="search" id="search" type="search" placeholder="ابحث داخل الصنف...">
       </div>
-
-      <div class="catalog-panel">
-        <div class="catalog-toolbar">
-          <div>
-            <h2 id="categoryProductCount">التصاميم</h2>
-            <p>اختَر التصميم الذي يعجبك، ثم أكمل طلبك بالمقاس.</p>
-          </div>
-          <input class="search-input" id="categorySearch" type="search" placeholder="ابحث داخل الصنف..." aria-label="ابحث داخل الصنف">
-        </div>
-        <div class="products" id="categoryProducts"></div>
-      </div>
+      <div class="products" id="products"></div>
     </div>
   </main>
 
   <footer>
-    <div class="container footer-inner">
-      <a class="brand" href="./"><span class="brand-mark">X</span><span>X LINE</span></a>
-      <span>© <span id="year"></span> X LINE — جميع الحقوق محفوظة</span>
-      <span>الشحن مجاني</span>
+    <div class="container footer-row">
+      <span class="brand"><span class="brand-mark">X</span><span>X LINE</span></span>
+      <span>© <span id="year"></span> X LINE — الشحن مجاني</span>
     </div>
   </footer>
 
   <a class="whatsapp" href="https://wa.me/201208887256" target="_blank" rel="noopener" aria-label="واتساب">◉</a>
 
-  <div class="modal" id="guideModal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h2 id="guideTitle">دليل تركيب ورق الحائط</h2>
-        <button class="close-btn" id="guideCloseBtn" aria-label="إغلاق">✕</button>
-      </div>
-      <p class="muted">اتبع تعليمات اللاصق ونوع الورق المرفق مع طلبك.</p>
-      <div class="guide-list">
-        <article class="guide-step"><h3>١. تجهيز الحائط</h3><p>نظف السطح واتركه يجف وعالج الشقوق.</p></article>
-        <article class="guide-step"><h3>٢. ترتيب الشرائح</h3><p>راجع المقاس واتجاه التصميم ورتب الشرائح.</p></article>
-        <article class="guide-step"><h3>٣. تحديد نقطة البداية</h3><p>استخدم ميزانًا لرسم خط رأسي مستقيم.</p></article>
-        <article class="guide-step"><h3>٤. التركيب</h3><p>استخدم اللاصق المناسب وثبت الشرائح مع مطابقة الرسم.</p></article>
-      </div>
-    </div>
-  </div>
-
   <script>
     "use strict";
 
+    const PRICE = 450;
     const WHATSAPP = "201208887256";
-    const PRICE_PER_SQM = 450;
-    const DISCOUNT_THRESHOLD = 5;
-    const DISCOUNT_RATE = 0.05;
 
-    const categories = [
-      { id: "interior-panels", name: "Interior Panels", description: "بانلز حائط بمظهر مرتب ومعاصر", tags: "modern interior wall panels" },
-      { id: "calligraphy", name: "Calligraphy", description: "تصميمات خط عربي وديكور شرقي", tags: "arabic calligraphy decor" },
-      { id: "kids", name: "Kids", description: "تصميمات مرحة لغرف الأطفال", tags: "kids bedroom" },
-      { id: "mural", name: "Mural", description: "مشاهد جدارية كبيرة للطبيعة والفن", tags: "wall mural interior" },
-      { id: "marble", name: "Marble", description: "رخام أنيق بلمسة فاخرة", tags: "marble wall interior" },
-      { id: "wood", name: "Wood", description: "تصميمات خشب طبيعية وعصرية", tags: "wood wall interior" },
-      { id: "concrete", name: "Concrete", description: "ستايل مودرن بملمس الخرسانة", tags: "concrete wall interior" },
-      { id: "leaves", name: "Leaves", description: "أوراق ونباتات خضراء", tags: "tropical leaves interior" }
+    // صور مختلفة مباشرة؛ لا يوجد fallback موحد يكرر نفس الصورة.
+    const imageIds = [
+      "photo-1618221195710-dd6b41faaea6",
+      "photo-1600607687939-ce8a6c25118c",
+      "photo-1600210492486-724fe5c67fb0",
+      "photo-1600607687920-4e2a09cf159d",
+      "photo-1600566753086-00f18fb6b3ea",
+      "photo-1616486338812-3dadae4b4ace",
+      "photo-1534796636912-3b95b3ab5986",
+      "photo-1446776811953-b23d57bd21aa",
+      "photo-1441974231531-c6227db76b6e",
+      "photo-1549490349-8643362247b5",
+      "photo-1470770841072-f978cf4d019e",
+      "photo-1470252649378-9c29740c9fa8",
+      "photo-1500530855697-b586d89ba3ee",
+      "photo-1464822759023-fed622ff2c3b",
+      "photo-1433086966358-54859d0ed716",
+      "photo-1497250681960-ef046c08a56e",
+      "photo-1501004318641-b39e6451bec6",
+      "photo-1487530811176-3780de880c2d",
+      "photo-1490750967868-88aa4486c946",
+      "photo-1513519245088-0e12902e5a38"
     ];
 
-    const designNames = {
-      "interior-panels": ["Velour", "Bravura", "Celestia", "Ornamenta", "Walnera", "Linear Luxe", "LuxeCraft", "Aurum", "Eterna", "Mahoro", "Modern Rhythm", "Soft Geometry"],
-      calligraphy: ["خط عربي ذهبي", "نقوش شرقية", "لمسة عربية", "زخرفة كلاسيكية", "فن شرقي أنيق", "حروف عربية", "لوحة خطية", "نقش تراثي", "خط ديواني", "كلمات ملهمة", "زخارف عربية", "Calligraphy Luxe"],
-      kids: ["Bubbly", "Toyria", "Playful Spots", "Cheerio", "Unicorn", "عالم النجوم", "مغامرات الفضاء", "غابة الأحلام", "ألوان مرحة", "سماء بنفسجية", "حيوانات الغابة", "بالونات وأحلام"],
-      mural: ["غروب الجبال", "وادي الطبيعة", "قمم وضباب", "غابة استوائية", "شلال هادئ", "حديقة خضراء", "سماء وردية", "طبيعة ساحرة", "مشهد بحري", "مدينة قديمة", "أقواس معمارية", "Mural Art"],
-      marble: ["رخام أبيض", "رخام بعروق ذهبية", "رخام رمادي", "رخام فاخر", "رخام هادئ", "رخام أسود", "رخام بيج", "Calacatta", "رخام كلاسيكي", "رخام عصري", "لمسات حجرية", "Marble Luxe"],
-      wood: ["خشب طبيعي", "ألواح خشبية", "خشب دافئ", "خطوط خشبية", "خشب عصري", "خشب فاتح", "خشب داكن", "ألواح ريفية", "خشب بلوط", "خشب جوز", "شرائح خشبية", "Wood Luxe"],
-      concrete: ["خرسانة ناعمة", "ملمس رمادي", "ستايل صناعي", "خرسانة عصرية", "رمادي أنيق", "إسمنت فاتح", "إسمنت داكن", "ملمس حجري", "خرسانة دافئة", "جدار صناعي", "ستايل خام", "Concrete Luxe"],
-      leaves: ["أوراق استوائية", "نباتات خضراء", "أغصان طبيعية", "حديقة هادئة", "لمسات نباتية", "أوراق مونستيرا", "غابة استوائية", "زهور وأوراق", "نباتات داكنة", "أوراق زيتونية", "طبيعة ناعمة", "Leaves Luxe"]
-    };
+    const categories = [
+      { id: "interior-panels", name: "Interior Panels", desc: "بانلز حائط بمظهر مرتب ومعاصر", names: ["Velour","Bravura","Celestia","Ornamenta","Walnera","Linear Luxe","LuxeCraft","Aurum","Eterna","Mahoro","Modern Rhythm","Soft Geometry"], offset: 0 },
+      { id: "calligraphy", name: "Calligraphy", desc: "تصميمات خط عربي وديكور شرقي", names: ["خط عربي ذهبي","نقوش شرقية","لمسة عربية","زخرفة كلاسيكية","فن شرقي أنيق","حروف عربية","لوحة خطية","نقش تراثي","خط ديواني","كلمات ملهمة","زخارف عربية","Calligraphy Luxe"], offset: 3 },
+      { id: "kids", name: "Kids", desc: "تصميمات مرحة ومبهجة لغرف الأطفال", names: ["Bubbly","Toyria","Playful Spots","Cheerio","Unicorn","عالم النجوم","مغامرات الفضاء","غابة الأحلام","ألوان مرحة","سماء بنفسجية","حيوانات الغابة","بالونات وأحلام"], offset: 6 },
+      { id: "mural", name: "Mural", desc: "مشاهد جدارية كبيرة للطبيعة والفن", names: ["غروب الجبال","وادي الطبيعة","قمم وضباب","غابة استوائية","شلال هادئ","حديقة خضراء","سماء وردية","طبيعة ساحرة","مشهد بحري","مدينة قديمة","أقواس معمارية","Mural Art"], offset: 9 },
+      { id: "marble", name: "Marble", desc: "رخام أنيق بلمسة فاخرة", names: ["رخام أبيض","رخام بعروق ذهبية","رخام رمادي","رخام فاخر","رخام هادئ","رخام أسود","رخام بيج","Calacatta","رخام كلاسيكي","رخام عصري","لمسات حجرية","Marble Luxe"], offset: 12 },
+      { id: "wood", name: "Wood", desc: "تصميمات خشب طبيعية وعصرية", names: ["خشب طبيعي","ألواح خشبية","خشب دافئ","خطوط خشبية","خشب عصري","خشب فاتح","خشب داكن","ألواح ريفية","خشب بلوط","خشب جوز","شرائح خشبية","Wood Luxe"], offset: 15 },
+      { id: "concrete", name: "Concrete", desc: "ستايل مودرن بملمس الخرسانة", names: ["خرسانة ناعمة","ملمس رمادي","ستايل صناعي","خرسانة عصرية","رمادي أنيق","إسمنت فاتح","إسمنت داكن","ملمس حجري","خرسانة دافئة","جدار صناعي","ستايل خام","Concrete Luxe"], offset: 2 },
+      { id: "leaves", name: "Leaves", desc: "أوراق ونباتات خضراء", names: ["أوراق استوائية","نباتات خضراء","أغصان طبيعية","حديقة هادئة","لمسات نباتية","أوراق مونستيرا","غابة استوائية","زهور وأوراق","نباتات داكنة","أوراق زيتونية","طبيعة ناعمة","Leaves Luxe"], offset: 5 }
+    ];
 
-    const fallbackImage = "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=80";
-
-    function imageUrl(tags, lock, width, height) {
-      return "https://loremflickr.com/" + width + "/" + height + "/" +
-        encodeURIComponent(tags) + "?lock=" + lock;
+    function photo(id, width = 900) {
+      return "https://images.unsplash.com/" + id +
+        "?auto=format&fit=crop&w=" + width + "&q=82";
     }
 
-    function escapeHtml(value) {
-      return String(value).replace(/[&<>"']/g, function (char) {
-        return {
-          "&": "&amp;", "<": "&lt;", ">": "&gt;",
-          '"': "&quot;", "'": "&#39;"
-        }[char];
-      });
+    function categoryImage(category, index) {
+      const id = imageIds[(category.offset + index) % imageIds.length];
+      return photo(id, 900);
     }
 
-    const params = new URLSearchParams(window.location.search);
-    const categoryId = params.get("category");
+    function productImage(category, index) {
+      // كل تصميم في صفحة الصنف له صورة مختلفة عن التصميمات الأخرى.
+      const id = imageIds[(category.offset + index + 2) % imageIds.length];
+      return photo(id, 850);
+    }
+
+    const grid = document.getElementById("categoryGrid");
+    const home = document.getElementById("homeView");
+    const page = document.getElementById("categoryView");
+    const productsEl = document.getElementById("products");
+    const searchEl = document.getElementById("search");
+    const params = new URLSearchParams(location.search);
     let selectedDesign = params.get("design") || "";
 
-    const homeView = document.getElementById("homeView");
-    const categoryView = document.getElementById("categoryView");
-    const categoryGrid = document.getElementById("categoryGrid");
-    const categoryProducts = document.getElementById("categoryProducts");
-    const categorySearch = document.getElementById("categorySearch");
+    grid.innerHTML = categories.map(function (category, index) {
+      return `
+        <a class="category-card" href="?category=${encodeURIComponent(category.id)}">
+          <img src="${categoryImage(category, index)}" alt="${category.name}" loading="lazy">
+          <span>${category.name} ←</span>
+        </a>`;
+    }).join("");
 
-    function renderCategories() {
-      categoryGrid.innerHTML = categories.map(function (category, index) {
-        return `
-          <a class="category-card" href="?category=${encodeURIComponent(category.id)}" aria-label="تصاميم ${escapeHtml(category.name)}">
-            <img src="${imageUrl(category.tags, index + 10, 800, 550)}"
-                 alt="${escapeHtml(category.name)}"
-                 loading="lazy"
-                 onerror="this.onerror=null;this.src='${fallbackImage}'">
-            <span>${escapeHtml(category.name)} ←</span>
-          </a>`;
-      }).join("");
-    }
-
-    function renderProducts(products) {
-      if (!products.length) {
-        categoryProducts.innerHTML = '<div class="empty-state">لا توجد تصاميم مطابقة للبحث.</div>';
-        return;
-      }
-
-      categoryProducts.innerHTML = products.map(function (product) {
-        const name = escapeHtml(product.name);
-        const image = imageUrl(product.tags, product.lock, 800, 650);
-        const selectUrl = "./?design=" + encodeURIComponent(product.name) + "#calculator";
-
-        return `
-          <article class="product-card">
-            <div class="product-image">
-              <img src="${image}" alt="${name}" loading="lazy"
-                   onerror="this.onerror=null;this.src='${fallbackImage}'">
-            </div>
-            <div class="product-info">
-              <h3>${name}</h3>
-              <div class="product-row">
-                <span class="product-price">450 جنيه / م²</span>
-                <a class="select-design" href="${selectUrl}">اختيار التصميم</a>
-              </div>
-            </div>
-          </article>`;
-      }).join("");
-    }
-
-    function showCategory(id) {
-      const category = categories.find(function (item) { return item.id === id; });
-
-      if (!category) {
-        homeView.hidden = false;
-        categoryView.hidden = true;
-        return;
-      }
-
-      homeView.hidden = true;
-      categoryView.hidden = false;
+    function showCategory(category) {
+      home.hidden = true;
+      page.hidden = false;
       document.title = "تصاميم " + category.name + " | X LINE";
-      document.getElementById("categoryPageTitle").textContent = category.name;
-      document.getElementById("categoryPageDescription").textContent =
-        category.description + ". تصفح التصميمات واختر المناسب لحائطك.";
+      document.getElementById("categoryTitle").textContent = category.name;
+      document.getElementById("categoryDescription").textContent = category.desc;
+      document.getElementById("designCount").textContent = category.names.length + " تصميم";
 
-      const products = (designNames[id] || []).map(function (name, index) {
-        return {
-          name: name,
-          tags: category.tags,
-          lock: 100 + categories.indexOf(category) * 20 + index
-        };
+      const list = category.names.map(function (name, index) {
+        return { name: name, image: productImage(category, index) };
       });
 
-      document.getElementById("categoryProductCount").textContent =
-        products.length + " تصميم";
+      function render(items) {
+        if (!items.length) {
+          productsEl.innerHTML = '<div class="empty">لا توجد نتائج مطابقة.</div>';
+          return;
+        }
 
-      renderProducts(products);
+        productsEl.innerHTML = items.map(function (item) {
+          return `
+            <article class="product">
+              <div class="product-image">
+                <img src="${item.image}" alt="${item.name}" loading="lazy">
+              </div>
+              <div class="product-info">
+                <h3>${item.name}</h3>
+                <div class="product-row">
+                  <span class="product-price">450 جنيه / م²</span>
+                  <a class="choose" href="./?design=${encodeURIComponent(item.name)}#calculator">اختيار التصميم</a>
+                </div>
+              </div>
+            </article>`;
+        }).join("");
+      }
 
-      categorySearch.addEventListener("input", function () {
-        const query = categorySearch.value.trim().toLowerCase();
-        renderProducts(products.filter(function (product) {
-          return product.name.toLowerCase().includes(query);
-        }));
+      render(list);
+      searchEl.addEventListener("input", function () {
+        const query = searchEl.value.trim().toLowerCase();
+        render(list.filter(item => item.name.toLowerCase().includes(query)));
       });
     }
 
-    function formatMoney(value) {
-      return value.toLocaleString("ar-EG", { maximumFractionDigits: 2 }) + " جنيه";
-    }
-
-    function updateCalculator() {
-      const width = Math.max(0, Number(document.getElementById("width").value) || 0);
-      const height = Math.max(0, Number(document.getElementById("height").value) || 0);
-      const area = width * height / 10000;
-      const subtotal = area * PRICE_PER_SQM;
-      const discount = area > DISCOUNT_THRESHOLD ? subtotal * DISCOUNT_RATE : 0;
-
-      document.getElementById("area").textContent = area.toFixed(2) + " م²";
-      document.getElementById("subtotal").textContent = formatMoney(subtotal);
-      document.getElementById("discount").textContent = formatMoney(discount);
-      document.getElementById("total").textContent = formatMoney(subtotal - discount);
-      document.getElementById("discountNote").style.display = discount ? "block" : "none";
-    }
-
-    function showToast(message) {
-      window.alert(message);
-    }
-
-    renderCategories();
-    showCategory(categoryId);
+    const selectedCategory = categories.find(item => item.id === params.get("category"));
+    if (selectedCategory) showCategory(selectedCategory);
 
     if (selectedDesign) {
       document.getElementById("selectedDesign").textContent = selectedDesign;
     }
 
-    document.getElementById("width").addEventListener("input", updateCalculator);
-    document.getElementById("height").addEventListener("input", updateCalculator);
-    updateCalculator();
+    function money(value) {
+      return value.toLocaleString("ar-EG", { maximumFractionDigits: 2 }) + " جنيه";
+    }
+
+    function updatePrice() {
+      const width = Math.max(0, Number(document.getElementById("width").value) || 0);
+      const height = Math.max(0, Number(document.getElementById("height").value) || 0);
+      const area = width * height / 10000;
+      const subtotal = area * PRICE;
+      const discount = area > 5 ? subtotal * .05 : 0;
+
+      document.getElementById("area").textContent = area.toFixed(2) + " م²";
+      document.getElementById("subtotal").textContent = money(subtotal);
+      document.getElementById("discount").textContent = money(discount);
+      document.getElementById("total").textContent = money(subtotal - discount);
+    }
+
+    document.getElementById("width").addEventListener("input", updatePrice);
+    document.getElementById("height").addEventListener("input", updatePrice);
+    updatePrice();
 
     document.getElementById("roomImage").addEventListener("change", function () {
       const file = this.files && this.files[0];
-      if (!file) return;
-
-      if (!file.type.startsWith("image/")) {
-        showToast("من فضلك اختر ملف صورة.");
-        this.value = "";
-        return;
-      }
-
+      if (!file || !file.type.startsWith("image/")) return;
       const reader = new FileReader();
-      reader.onload = function (event) {
-        const preview = document.getElementById("uploadPreview");
+      reader.onload = event => {
+        const preview = document.getElementById("preview");
         preview.src = event.target.result;
         preview.style.display = "block";
       };
@@ -809,50 +583,24 @@
     document.getElementById("orderBtn").addEventListener("click", function () {
       const width = Number(document.getElementById("width").value) || 0;
       const height = Number(document.getElementById("height").value) || 0;
-
       if (width <= 0 || height <= 0) {
-        showToast("أدخل عرض وارتفاع الحائط أولًا.");
+        alert("أدخل عرض وارتفاع الحائط أولًا.");
         return;
       }
 
       const area = width * height / 10000;
-      const subtotal = area * PRICE_PER_SQM;
-      const discount = area > DISCOUNT_THRESHOLD ? subtotal * DISCOUNT_RATE : 0;
+      const subtotal = area * PRICE;
+      const discount = area > 5 ? subtotal * .05 : 0;
       const message = [
         "مرحبًا X LINE، أريد الاستفسار عن طلب ورق حائط:",
         "التصميم: " + (selectedDesign || "لم أختَر تصميمًا بعد"),
         "العرض: " + width + " سم",
         "الارتفاع: " + height + " سم",
         "المساحة: " + area.toFixed(2) + " م²",
-        "السعر قبل الخصم: " + subtotal.toFixed(2) + " جنيه",
-        "الخصم: " + discount.toFixed(2) + " جنيه",
         "الإجمالي: " + (subtotal - discount).toFixed(2) + " جنيه"
       ].join("\n");
 
       window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message), "_blank");
-    });
-
-    document.getElementById("searchFocusBtn").addEventListener("click", function () {
-      if (!categoryView.hidden) {
-        categorySearch.focus();
-        categorySearch.scrollIntoView({ behavior: "smooth", block: "center" });
-      } else {
-        document.getElementById("categories").scrollIntoView({ behavior: "smooth" });
-      }
-    });
-
-    const guideModal = document.getElementById("guideModal");
-    function openGuide() { guideModal.classList.add("open"); }
-    function closeGuide() { guideModal.classList.remove("open"); }
-
-    document.getElementById("guideOpenBtn").addEventListener("click", openGuide);
-    document.getElementById("guideOpenBtn2").addEventListener("click", openGuide);
-    document.getElementById("guideCloseBtn").addEventListener("click", closeGuide);
-    guideModal.addEventListener("click", function (event) {
-      if (event.target === guideModal) closeGuide();
-    });
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") closeGuide();
     });
 
     document.getElementById("year").textContent = new Date().getFullYear();
