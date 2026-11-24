@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080b12">
   <title>X LINE | ورق حائط حسب المقاس</title>
-  <meta name="description" content="اختر تصميم ورق الحائط، أدخل مقاس الحائط، واعرف السعر مع الشحن المجاني من X LINE.">
+  <meta name="description" content="اختر تصميم ورق الحائط، أدخل مقاس الحائط، واعرف السعر مع الشحن المجاني من X LINE">
 
   <style>
     :root {
@@ -40,6 +40,7 @@
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
     button { color: inherit; }
+    [hidden] { display: none !important; }
 
     .container { width: min(1180px, calc(100% - 32px)); margin-inline: auto; }
 
@@ -249,12 +250,9 @@
       position: relative;
       height: 168px;
       overflow: hidden;
-      padding: 0;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--card);
-      text-align: right;
-      cursor: pointer;
       transition: .3s ease;
     }
 
@@ -281,15 +279,13 @@
       font-weight: 900;
     }
 
-    .category-card:hover,
-    .category-card.active {
+    .category-card:hover {
       transform: translateY(-6px);
       border-color: rgba(85,185,255,.65);
       box-shadow: 0 18px 38px rgba(0,0,0,.25);
     }
 
-    .category-card:hover img,
-    .category-card.active img { transform: scale(1.08); }
+    .category-card:hover img { transform: scale(1.08); }
 
     .catalog-panel {
       margin-top: 24px;
@@ -383,6 +379,41 @@
 
     .select-design:hover { color: #06101c; background: var(--blue); }
     .empty-state { grid-column: 1 / -1; color: var(--muted); padding: 25px; text-align: center; }
+
+    .category-page {
+      min-height: 65vh;
+      padding-block: 48px 72px;
+    }
+
+    .category-page-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .back-link:hover { border-color: var(--blue); color: var(--blue); }
+
+    .category-page h1 {
+      margin: 0 0 8px;
+      font-size: clamp(30px, 5vw, 46px);
+      letter-spacing: 0;
+    }
+
+    .category-page-intro { margin: 0; color: var(--muted); line-height: 1.7; }
 
     .calculator {
       display: grid;
@@ -628,7 +659,7 @@
       .select-design { width: 100%; }
       .form-grid { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr; }
-      .cta, .footer-inner { align-items: stretch; flex-direction: column; }
+      .cta, .footer-inner, .category-page-top { align-items: stretch; flex-direction: column; }
       .cta .btn { width: 100%; }
       .whatsapp { width: 52px; height: 52px; }
     }
@@ -653,17 +684,17 @@
 <body>
   <header class="nav">
     <div class="container nav-inner">
-      <a class="brand" href="#" aria-label="X LINE الرئيسية">
+      <a class="brand" href="./" aria-label="X LINE الرئيسية">
         <span class="brand-mark"><span>X</span></span>
         <span>X LINE</span>
       </a>
 
       <nav class="nav-links" aria-label="القائمة الرئيسية">
-        <a href="#categories">الأصناف</a>
-        <a href="#catalog">التصاميم</a>
-        <a href="#calculator">احسب مقاسك</a>
-        <a href="#installation">التركيب</a>
-        <a href="#faq">الأسئلة الشائعة</a>
+        <a href="./#categories">الأصناف</a>
+        <a href="./#catalog">التصاميم</a>
+        <a href="./#calculator">احسب مقاسك</a>
+        <a href="./#installation">التركيب</a>
+        <a href="./#faq">الأسئلة الشائعة</a>
       </nav>
 
       <div class="nav-actions">
@@ -673,7 +704,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="homeView">
     <section class="container hero">
       <div>
         <div class="eyebrow">◆ طباعة خاصة حسب المقاس</div>
@@ -697,7 +728,7 @@
         <div class="section-head">
           <div>
             <h2>اختر الصنف</h2>
-            <p>اضغط على الصنف لعرض كل التصاميم المتاحة فيه.</p>
+            <p>اضغط على الصنف لفتح صفحة مستقلة فيها تصاميمه.</p>
           </div>
         </div>
         <div class="category-grid" id="categoryGrid"></div>
@@ -708,20 +739,20 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>التصاميم</h2>
-            <p>اختَر التصميم الذي يعجبك، ثم احسب مقاس حائطك.</p>
+            <h2>كل التصاميم</h2>
+            <p>تصفح كل التصاميم أو افتح صنفًا لعرض تصاميمه فقط.</p>
           </div>
         </div>
 
         <div class="catalog-panel">
           <div class="catalog-toolbar">
             <div>
-              <h3 id="catalogTitle">كل التصاميم</h3>
-              <p id="catalogDescription">اختَر صنفًا لعرض تصاميمه، أو تصفح كل التصاميم.</p>
+              <h3>كتالوج التصاميم</h3>
+              <p>اختر تصميمًا للانتقال إلى حاسبة المقاس.</p>
             </div>
-            <input class="search-input" id="designSearch" type="search" placeholder="ابحث عن تصميم..." aria-label="ابحث عن تصميم">
+            <input class="search-input" id="homeSearch" type="search" placeholder="ابحث عن تصميم..." aria-label="ابحث عن تصميم">
           </div>
-          <div class="products" id="products"></div>
+          <div class="products" id="homeProducts"></div>
         </div>
       </div>
     </section>
@@ -752,7 +783,7 @@
               <div>
                 <div style="font-size:28px;margin-bottom:7px">＋</div>
                 <strong>ارفع صورة الغرفة أو التصميم</strong>
-                <div style="font-size:13px;margin-top:6px">تظهر المعاينة على جهازك فقط؛ أرسل الصورة لنا عبر واتساب إذا أردت إرفاقها بالطلب.</div>
+                <div style="font-size:13px;margin-top:6px">المعاينة على جهازك فقط. أرسل الصورة عبر واتساب إذا أردت إرفاقها بالطلب.</div>
               </div>
               <input id="roomImage" type="file" accept="image/*">
             </label>
@@ -828,9 +859,32 @@
     </section>
   </main>
 
+  <main id="categoryView" class="category-page" hidden>
+    <div class="container">
+      <div class="category-page-top">
+        <div>
+          <h1 id="categoryPageTitle"></h1>
+          <p class="category-page-intro" id="categoryPageDescription"></p>
+        </div>
+        <a class="back-link" href="./#categories">← الرجوع للأصناف</a>
+      </div>
+
+      <div class="catalog-panel">
+        <div class="catalog-toolbar">
+          <div>
+            <h3 id="categoryProductCount">التصاميم</h3>
+            <p>اختَر التصميم الذي يعجبك، ثم أكمل طلبك بالمقاس.</p>
+          </div>
+          <input class="search-input" id="categorySearch" type="search" placeholder="ابحث داخل الصنف..." aria-label="ابحث داخل الصنف">
+        </div>
+        <div class="products" id="categoryProducts"></div>
+      </div>
+    </div>
+  </main>
+
   <footer>
     <div class="container footer-inner">
-      <a class="brand" href="#"><span class="brand-mark"><span>X</span></span><span>X LINE</span></a>
+      <a class="brand" href="./"><span class="brand-mark"><span>X</span></span><span>X LINE</span></a>
       <span>© <span id="year"></span> X LINE — جميع الحقوق محفوظة</span>
       <span>الشحن مجاني لجميع المحافظات</span>
     </div>
@@ -874,14 +928,14 @@
       `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=82`;
 
     const categories = [
-      { id: "interior-panels", name: "Interior Panels", image: "photo-1618221195710-dd6b41faaea6" },
-      { id: "calligraphy", name: "Calligraphy", image: "photo-1600607687939-ce8a6c25118c" },
-      { id: "kids", name: "Kids", image: "photo-1534796636912-3b95b3ab5986" },
-      { id: "mural", name: "Mural", image: "photo-1470252649378-9c29740c9fa8" },
-      { id: "marble", name: "Marble", image: "photo-1600210492486-724fe5c67fb0" },
-      { id: "wood", name: "Wood", image: "photo-1600566753086-00f18fb6b3ea" },
-      { id: "concrete", name: "Concrete", image: "photo-1600607687920-4e2a09cf159d" },
-      { id: "leaves", name: "Leaves", image: "photo-1497250681960-ef046c08a56e" }
+      { id: "interior-panels", name: "Interior Panels", description: "بانلز حائط بمظهر مرتب ومعاصر", image: "photo-1618221195710-dd6b41faaea6" },
+      { id: "calligraphy", name: "Calligraphy", description: "تصميمات خط عربي وديكور شرقي", image: "photo-1600607687939-ce8a6c25118c" },
+      { id: "kids", name: "Kids", description: "تصميمات مرحة لغرف الأطفال", image: "photo-1534796636912-3b95b3ab5986" },
+      { id: "mural", name: "Mural", description: "مشاهد كبيرة تغيّر إحساس المساحة", image: "photo-1470252649378-9c29740c9fa8" },
+      { id: "marble", name: "Marble", description: "رخام أنيق بلمسة فاخرة", image: "photo-1600210492486-724fe5c67fb0" },
+      { id: "wood", name: "Wood", description: "دفء ومظهر الخشب", image: "photo-1600566753086-00f18fb6b3ea" },
+      { id: "concrete", name: "Concrete", description: "ستايل مودرن خام وبسيط", image: "photo-1600607687920-4e2a09cf159d" },
+      { id: "leaves", name: "Leaves", description: "أوراق استوائية وطبيعة هادئة", image: "photo-1497250681960-ef046c08a56e" }
     ];
 
     const products = [
@@ -939,45 +993,28 @@
       { name: "لمسات نباتية", category: "leaves", image: "photo-1441974231531-c6227db76b6e" }
     ];
 
+    const homeView = document.getElementById("homeView");
+    const categoryView = document.getElementById("categoryView");
     const categoryGrid = document.getElementById("categoryGrid");
-    const productsContainer = document.getElementById("products");
-    const catalogTitle = document.getElementById("catalogTitle");
-    const catalogDescription = document.getElementById("catalogDescription");
-    const searchInput = document.getElementById("designSearch");
-    const selectedDesignElement = document.getElementById("selectedDesign");
-
-    let activeCategory = "all";
+    const homeProducts = document.getElementById("homeProducts");
+    const categoryProducts = document.getElementById("categoryProducts");
+    const categorySearch = document.getElementById("categorySearch");
+    const homeSearch = document.getElementById("homeSearch");
+    const params = new URLSearchParams(window.location.search);
+    const categoryId = params.get("category");
     let selectedDesign = "";
 
     function renderCategories() {
       categoryGrid.innerHTML = categories.map(category => `
-        <button class="category-card" type="button" data-category="${category.id}" aria-label="عرض تصاميم ${category.name}">
+        <a class="category-card" href="?category=${encodeURIComponent(category.id)}" aria-label="عرض تصاميم ${category.name}">
           <img src="${photo(category.image, 600)}" alt="${category.name}" loading="lazy">
-          <span>${category.name} <small>←</small></span>
-        </button>
+          <span>${category.name}</span>
+        </a>
       `).join("");
-
-      categoryGrid.querySelectorAll(".category-card").forEach(card => {
-        card.addEventListener("click", () => selectCategory(card.dataset.category));
-      });
     }
 
-    function renderProducts() {
-      const term = searchInput.value.trim().toLowerCase();
-
-      const visibleProducts = products.filter(product => {
-        const matchesCategory = activeCategory === "all" || product.category === activeCategory;
-        const matchesSearch = product.name.toLowerCase().includes(term);
-        return matchesCategory && matchesSearch;
-      });
-
-      if (!visibleProducts.length) {
-        productsContainer.innerHTML =
-          '<div class="empty-state">لا توجد تصاميم مطابقة. جرّب البحث بكلمة أخرى.</div>';
-        return;
-      }
-
-      productsContainer.innerHTML = visibleProducts.map(product => `
+    function productCard(product) {
+      return `
         <article class="product-card">
           <div class="product-image">
             <img src="${photo(product.image)}" alt="${product.name}" loading="lazy">
@@ -986,38 +1023,48 @@
             <h4>${product.name}</h4>
             <div class="product-row">
               <span class="product-price">450 جنيه / م²</span>
-              <button class="select-design" type="button" data-name="${product.name}">اختيار التصميم</button>
+              <a class="select-design" href="?design=${encodeURIComponent(product.name)}#calculator">اختيار التصميم</a>
             </div>
           </div>
         </article>
-      `).join("");
-
-      productsContainer.querySelectorAll(".select-design").forEach(button => {
-        button.addEventListener("click", () => {
-          selectedDesign = button.dataset.name;
-          selectedDesignElement.textContent = selectedDesign;
-          showToast("تم اختيار: " + selectedDesign);
-          document.getElementById("calculator").scrollIntoView({ behavior: "smooth" });
-        });
-      });
+      `;
     }
 
-    function selectCategory(categoryId) {
-      activeCategory = categoryId;
-      const category = categories.find(item => item.id === categoryId);
+    function renderProducts(container, list) {
+      if (!list.length) {
+        container.innerHTML = '<div class="empty-state">لا توجد تصاميم مطابقة للبحث.</div>';
+        return;
+      }
+      container.innerHTML = list.map(productCard).join("");
+    }
 
-      categoryGrid.querySelectorAll(".category-card").forEach(card => {
-        card.classList.toggle("active", card.dataset.category === categoryId);
+    function showCategoryPage(id) {
+      const category = categories.find(item => item.id === id);
+
+      if (!category) {
+        homeView.hidden = false;
+        categoryView.hidden = true;
+        return;
+      }
+
+      homeView.hidden = true;
+      categoryView.hidden = false;
+      document.title = `تصاميم ${category.name} | X LINE`;
+      document.getElementById("categoryPageTitle").textContent = category.name;
+      document.getElementById("categoryPageDescription").textContent =
+        `${category.description}. تصفح التصاميم واختر التصميم المناسب لحائطك.`;
+
+      const list = products.filter(product => product.category === id);
+      document.getElementById("categoryProductCount").textContent = `${list.length} تصميم`;
+      renderProducts(categoryProducts, list);
+
+      categorySearch.addEventListener("input", () => {
+        const query = categorySearch.value.trim().toLowerCase();
+        renderProducts(
+          categoryProducts,
+          list.filter(product => product.name.toLowerCase().includes(query))
+        );
       });
-
-      catalogTitle.textContent = category ? category.name : "كل التصاميم";
-      catalogDescription.textContent = category
-        ? `تصفح كل التصاميم المتاحة في صنف ${category.name} واختر التصميم المناسب.`
-        : "اختَر صنفًا لعرض تصاميمه، أو تصفح كل التصاميم.";
-
-      searchInput.value = "";
-      renderProducts();
-      document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
     }
 
     function formatMoney(value) {
@@ -1039,9 +1086,32 @@
       document.getElementById("discountNote").style.display = discount > 0 ? "block" : "none";
     }
 
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2800);
+    }
+
+    renderCategories();
+    renderProducts(homeProducts, products);
+    showCategoryPage(categoryId);
+
+    homeSearch.addEventListener("input", () => {
+      const query = homeSearch.value.trim().toLowerCase();
+      renderProducts(homeProducts, products.filter(product => product.name.toLowerCase().includes(query)));
+    });
+
     document.getElementById("width").addEventListener("input", updateCalculator);
     document.getElementById("height").addEventListener("input", updateCalculator);
     updateCalculator();
+
+    const designFromUrl = params.get("design");
+    if (designFromUrl) {
+      selectedDesign = designFromUrl;
+      document.getElementById("selectedDesign").textContent = selectedDesign;
+    }
 
     document.getElementById("roomImage").addEventListener("change", function () {
       const file = this.files && this.files[0];
@@ -1076,11 +1146,9 @@
       const subtotal = area * PRICE_PER_SQM;
       const discount = area > DISCOUNT_THRESHOLD ? subtotal * DISCOUNT_RATE : 0;
       const total = subtotal - discount;
-      const selectedCategory = categories.find(item => item.id === activeCategory);
 
       const message = [
         "مرحبًا X LINE، أريد الاستفسار عن طلب ورق حائط:",
-        "الصنف: " + (selectedCategory ? selectedCategory.name : "غير محدد"),
         "التصميم: " + (selectedDesign || "لم أختَر تصميمًا بعد"),
         "العرض: " + width + " سم",
         "الارتفاع: " + height + " سم",
@@ -1091,18 +1159,17 @@
         "أرجو توضيح طريقة الدفع وتأكيد الطلب."
       ].join("\n");
 
-      window.open(
-        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`,
-        "_blank",
-        "noopener"
-      );
+      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
     });
 
-    searchInput.addEventListener("input", renderProducts);
-
     document.getElementById("searchFocusBtn").addEventListener("click", () => {
-      document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
-      setTimeout(() => searchInput.focus(), 450);
+      if (!categoryView.hidden) {
+        categorySearch.focus();
+        categorySearch.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => homeSearch.focus(), 450);
+      }
     });
 
     const guideModal = document.getElementById("guideModal");
@@ -1130,17 +1197,8 @@
       if (event.key === "Escape") closeGuide();
     });
 
-    function showToast(message) {
-      const toast = document.getElementById("toast");
-      toast.textContent = message;
-      toast.classList.add("show");
-      clearTimeout(showToast.timer);
-      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2800);
-    }
-
     const heroImage = document.getElementById("heroImage");
-
-    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    if (heroImage && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
       heroImage.addEventListener("mousemove", event => {
         const rect = heroImage.getBoundingClientRect();
         const rotateY = ((event.clientX - rect.left) / rect.width - 0.5) * 3;
@@ -1155,9 +1213,6 @@
     }
 
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    renderCategories();
-    renderProducts();
   </script>
 </body>
 </html>
