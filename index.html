@@ -1,341 +1,885 @@
-<script>
-  const WHATSAPP = "201208887256";
-  const PRICE_PER_SQM = 450;
-  const DISCOUNT_THRESHOLD = 5;
-  const DISCOUNT_RATE = 0.05;
-
-  const photo = (id, width = 850) =>
-    `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${width}&q=82`;
-
-  const categories = [
-    {
-      id: "interior-panels",
-      name: "Interior Panels",
-      description: "بانلز حائط بمظهر مرتب ومعاصر",
-      image: "photo-1618221195710-dd6b41faaea6"
-    },
-    {
-      id: "calligraphy",
-      name: "Calligraphy",
-      description: "تصميمات خط عربي وديكور شرقي",
-      image: "photo-1600607687939-ce8a6c25118c"
-    },
-    {
-      id: "kids",
-      name: "Kids",
-      description: "تصميمات مرحة لغرف الأطفال",
-      image: "photo-1616486338812-3dadae4b4ace"
-    },
-    {
-      id: "mural",
-      name: "Mural",
-      description: "مشاهد كبيرة تغيّر إحساس المساحة",
-      image: "photo-1470252649378-9c29740c9fa8"
-    },
-    {
-      id: "leaves",
-      name: "Leaves",
-      description: "أوراق استوائية وطبيعة هادئة",
-      image: "photo-1497250681960-ef046c08a56e"
-    },
-    {
-      id: "concrete",
-      name: "Concrete",
-      description: "ستايل مودرن خام وبسيط",
-      image: "photo-1600607687920-4e2a09cf159d"
-    },
-    {
-      id: "wood",
-      name: "Wood",
-      description: "دفء ومظهر الخشب الطبيعي",
-      image: "photo-1600566753086-00f18fb6b3ea"
-    },
-    {
-      id: "marble",
-      name: "Marble",
-      description: "رخام أنيق بلمسة فاخرة",
-      image: "photo-1600210492486-724fe5c67fb0"
-    }
-  ];
-
-  const products = [
-    /* Interior Panels */
-    { name: "Velour", category: "interior-panels", image: "photo-1618221195710-dd6b41faaea6" },
-    { name: "Bravura", category: "interior-panels", image: "photo-1600607687939-ce8a6c25118c" },
-    { name: "Celestia", category: "interior-panels", image: "photo-1600210492486-724fe5c67fb0" },
-    { name: "Ornamenta", category: "interior-panels", image: "photo-1600607687920-4e2a09cf159d" },
-    { name: "Walnera", category: "interior-panels", image: "photo-1600566753086-00f18fb6b3ea" },
-
-    /* Calligraphy */
-    { name: "خط عربي ذهبي", category: "calligraphy", image: "photo-1600607687939-ce8a6c25118c" },
-    { name: "نقوش شرقية", category: "calligraphy", image: "photo-1600210492486-724fe5c67fb0" },
-    { name: "لمسة عربية", category: "calligraphy", image: "photo-1616486338812-3dadae4b4ace" },
-    { name: "زخرفة كلاسيكية", category: "calligraphy", image: "photo-1600607687920-4e2a09cf159d" },
-    { name: "فن شرقي أنيق", category: "calligraphy", image: "photo-1600566753086-00f18fb6b3ea" },
-
-    /* Kids */
-    { name: "عالم النجوم", category: "kids", image: "photo-1534796636912-3b95b3ab5986" },
-    { name: "مغامرات الفضاء", category: "kids", image: "photo-1446776811953-b23d57bd21aa" },
-    { name: "غابة الأحلام", category: "kids", image: "photo-1441974231531-c6227db76b6e" },
-    { name: "ألوان مرحة", category: "kids", image: "photo-1549490349-8643362247b5" },
-    { name: "سماء بنفسجية", category: "kids", image: "photo-1470770841072-f978cf4d019e" },
-
-    /* Mural */
-    { name: "غروب الجبال", category: "mural", image: "photo-1470252649378-9c29740c9fa8" },
-    { name: "وادي الطبيعة", category: "mural", image: "photo-1500530855697-b586d89ba3ee" },
-    { name: "قمم وضباب", category: "mural", image: "photo-1464822759023-fed622ff2c3b" },
-    { name: "غابة استوائية", category: "mural", image: "photo-1441974231531-c6227db76b6e" },
-    { name: "شلال هادئ", category: "mural", image: "photo-1433086966358-54859d0ed716" },
-
-    /* Leaves */
-    { name: "أوراق استوائية", category: "leaves", image: "photo-1497250681960-ef046c08a56e" },
-    { name: "نباتات خضراء", category: "leaves", image: "photo-1501004318641-b39e6451bec6" },
-    { name: "أغصان طبيعية", category: "leaves", image: "photo-1487530811176-3780de880c2d" },
-    { name: "حديقة هادئة", category: "leaves", image: "photo-1490750967868-88aa4486c946" },
-    { name: "لمسات نباتية", category: "leaves", image: "photo-1441974231531-c6227db76b6e" },
-
-    /* Concrete */
-    { name: "خرسانة ناعمة", category: "concrete", image: "photo-1600607687920-4e2a09cf159d" },
-    { name: "ملمس رمادي", category: "concrete", image: "photo-1600607687939-ce8a6c25118c" },
-    { name: "ستايل صناعي", category: "concrete", image: "photo-1600210492486-724fe5c67fb0" },
-    { name: "خرسانة عصرية", category: "concrete", image: "photo-1618221195710-dd6b41faaea6" },
-    { name: "رمادي أنيق", category: "concrete", image: "photo-1600566753086-00f18fb6b3ea" },
-
-    /* Wood */
-    { name: "خشب طبيعي", category: "wood", image: "photo-1600566753086-00f18fb6b3ea" },
-    { name: "ألواح خشبية", category: "wood", image: "photo-1600607687920-4e2a09cf159d" },
-    { name: "خشب دافئ", category: "wood", image: "photo-1600210492486-724fe5c67fb0" },
-    { name: "خطوط خشبية", category: "wood", image: "photo-1618221195710-dd6b41faaea6" },
-    { name: "خشب عصري", category: "wood", image: "photo-1600607687939-ce8a6c25118c" },
-
-    /* Marble */
-    { name: "رخام أبيض", category: "marble", image: "photo-1600210492486-724fe5c67fb0" },
-    { name: "رخام بعروق ذهبية", category: "marble", image: "photo-1600607687939-ce8a6c25118c" },
-    { name: "رخام رمادي", category: "marble", image: "photo-1600607687920-4e2a09cf159d" },
-    { name: "رخام فاخر", category: "marble", image: "photo-1600566753086-00f18fb6b3ea" },
-    { name: "رخام هادئ", category: "marble", image: "photo-1616486338812-3dadae4b4ace" }
-  ];
-
-  const categoryGrid = document.getElementById("categoryGrid");
-  const productsContainer = document.getElementById("products");
-  const catalogTitle = document.getElementById("catalogTitle");
-  const catalogDescription = document.getElementById("catalogDescription");
-  const searchInput = document.getElementById("designSearch");
-  const selectedDesignElement = document.getElementById("selectedDesign");
-
-  let activeCategory = "all";
-  let selectedDesign = "";
-
-  function renderCategories() {
-    categoryGrid.innerHTML = categories.map(category => `
-      <button class="category-card" type="button" data-category="${category.id}" aria-label="عرض تصاميم ${category.name}">
-        <img src="${photo(category.image, 600)}" alt="${category.name}" loading="lazy">
-        <span>
-          ${category.name}
-          <small style="display:block;margin-top:5px;font-size:12px;font-weight:400;opacity:.85">
-            ${category.description}
-          </small>
-        </span>
-      </button>
-    `).join("");
-
-    categoryGrid.querySelectorAll(".category-card").forEach(card => {
-      card.addEventListener("click", () => selectCategory(card.dataset.category));
-    });
-  }
-
-  function renderProducts() {
-    const term = searchInput.value.trim().toLowerCase();
-
-    const visibleProducts = products.filter(product => {
-      const matchesCategory =
-        activeCategory === "all" || product.category === activeCategory;
-      const matchesSearch = product.name.toLowerCase().includes(term);
-      return matchesCategory && matchesSearch;
-    });
-
-    if (!visibleProducts.length) {
-      productsContainer.innerHTML =
-        '<div class="empty-state">لا توجد تصاميم مطابقة. جرّب البحث بكلمة أخرى.</div>';
-      return;
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <title>X LINE | ورق حائط حسب المقاس</title>
+  <meta name="description" content="اختر تصميم ورق الحائط، أدخل مقاس الحائط، واطلب الطباعة والتوصيل مجانًا من X LINE.">
+  <style>
+    :root {
+      --blue: #55b9ff;
+      --blue-dark: #1677ff;
+      --bg: #080b12;
+      --card: #111722;
+      --card2: #161e2b;
+      --text: #f7fbff;
+      --muted: #aeb8c7;
+      --line: rgba(255,255,255,.1);
+      --green: #65df9e;
+      --radius: 18px;
     }
 
-    productsContainer.innerHTML = visibleProducts.map(product => `
-      <article class="product-card">
-        <div class="product-image">
-          <img src="${photo(product.image)}" alt="${product.name}" loading="lazy">
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--text);
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 78% 8%, rgba(64,155,255,.13), transparent 25rem),
+        radial-gradient(circle at 15% 32%, rgba(64,155,255,.07), transparent 20rem),
+        var(--bg);
+    }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { color: inherit; }
+
+    .container { width: min(1180px, calc(100% - 32px)); margin-inline: auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8,11,18,.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      color: #06101c;
+      background: linear-gradient(135deg, #72caff, #278fff);
+      box-shadow: 0 10px 30px rgba(67,176,255,.22);
+      transform: skewX(-8deg);
+    }
+    .brand-mark span { transform: skewX(8deg); }
+    .nav-links { display: flex; align-items: center; gap: 20px; color: var(--muted); font-size: 14px; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+      cursor: pointer;
+      transition: .25s;
+    }
+    .icon-btn:hover { transform: translateY(-2px); border-color: var(--blue); color: var(--blue); }
+
+    .hero {
+      min-height: 590px;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      align-items: center;
+      gap: 42px;
+      padding-block: 64px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      padding: 9px 13px;
+      margin-bottom: 18px;
+      color: var(--blue);
+      background: rgba(85,185,255,.08);
+      border: 1px solid rgba(85,185,255,.18);
+      border-radius: 999px;
+      font-weight: 800;
+    }
+    h1 { margin: 0 0 18px; font-size: clamp(42px, 6vw, 72px); line-height: 1.05; letter-spacing: -2px; }
+    .blue-text {
+      color: var(--blue);
+      background: linear-gradient(135deg, #9bdcff, #3197ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p { max-width: 580px; color: var(--muted); font-size: 17px; line-height: 1.85; }
+    .price-line { display: flex; align-items: baseline; gap: 10px; margin: 24px 0; }
+    .price-line strong { font-size: 32px; }
+    .price-line span { color: var(--muted); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .btn {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary {
+      color: #06101c;
+      background: linear-gradient(135deg, #72caff, #278fff);
+      box-shadow: 0 12px 32px rgba(39,143,255,.2);
+    }
+    .btn-primary:hover { box-shadow: 0 16px 38px rgba(39,143,255,.32); }
+    .btn-secondary { background: var(--card); border: 1px solid var(--line); }
+
+    .hero-image {
+      position: relative;
+      height: 440px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      box-shadow: 0 28px 75px rgba(0,0,0,.4);
+      transition: transform .2s ease-out;
+    }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-image::after {
+      content: "";
+      position: absolute;
+      inset: 45% 0 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.72));
+    }
+    .hero-badge {
+      position: absolute;
+      z-index: 1;
+      right: 18px;
+      bottom: 18px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: rgba(8,11,18,.82);
+      backdrop-filter: blur(10px);
+    }
+    .hero-badge small { display: block; color: var(--muted); margin-bottom: 4px; }
+
+    .section { padding-block: 65px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 25px; }
+    .section-head h2 { margin: 0 0 7px; font-size: clamp(29px, 4vw, 42px); }
+    .section-head p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .category-card {
+      position: relative;
+      height: 168px;
+      overflow: hidden;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      text-align: right;
+      cursor: pointer;
+      transition: .3s ease;
+    }
+    .category-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .category-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 20%, rgba(3,6,10,.88));
+    }
+    .category-card span { position: absolute; z-index: 1; right: 15px; bottom: 14px; font-size: 17px; font-weight: 900; }
+    .category-card:hover { transform: translateY(-6px); border-color: rgba(85,185,255,.55); box-shadow: 0 18px 38px rgba(0,0,0,.25); }
+    .category-card:hover img { transform: scale(1.08); }
+
+    .catalog-panel {
+      margin-top: 24px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(17,23,34,.72);
+    }
+    .catalog-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 18px; }
+    .catalog-toolbar h3 { margin: 0 0 5px; font-size: 23px; }
+    .catalog-toolbar p { margin: 0; color: var(--muted); font-size: 14px; }
+    .search-input {
+      width: min(280px, 100%);
+      height: 44px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      outline: none;
+      color: var(--text);
+      background: #0b1018;
+    }
+    .search-input:focus { border-color: var(--blue); }
+    .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .product-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--card);
+      transition: .3s ease;
+    }
+    .product-card:hover { transform: translateY(-6px); border-color: rgba(85,185,255,.42); box-shadow: 0 18px 42px rgba(0,0,0,.25); }
+    .product-image { position: relative; height: 220px; overflow: hidden; background: var(--card2); }
+    .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .product-card:hover .product-image img { transform: scale(1.07); }
+    .product-info { padding: 13px; }
+    .product-info h4 { margin: 0 0 10px; font-size: 16px; }
+    .product-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .product-price { color: var(--blue); font-weight: 900; font-size: 14px; }
+    .select-design {
+      min-height: 37px;
+      padding: 0 11px;
+      border: 1px solid rgba(85,185,255,.24);
+      border-radius: 10px;
+      color: var(--blue);
+      background: rgba(85,185,255,.08);
+      cursor: pointer;
+    }
+    .select-design:hover { color: #06101c; background: var(--blue); }
+    .empty-state { grid-column: 1 / -1; color: var(--muted); padding: 25px; text-align: center; }
+
+    .calculator {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(17,23,34,.96), rgba(13,18,27,.96));
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 14px; }
+    .field input {
+      width: 100%;
+      height: 50px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      outline: none;
+      color: var(--text);
+      background: #0b1018;
+    }
+    .field input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(85,185,255,.08); }
+    .upload-box {
+      min-height: 145px;
+      display: grid;
+      place-items: center;
+      margin-top: 14px;
+      padding: 18px;
+      border: 1px dashed rgba(85,185,255,.42);
+      border-radius: 14px;
+      color: var(--muted);
+      background: rgba(85,185,255,.04);
+      text-align: center;
+      cursor: pointer;
+    }
+    .upload-box input { display: none; }
+    .upload-preview { display: none; width: 100%; max-height: 220px; margin-top: 12px; border-radius: 12px; object-fit: cover; }
+    .summary { display: flex; flex-direction: column; justify-content: space-between; padding: 17px; border: 1px solid var(--line); border-radius: 16px; background: #0a0e15; }
+    .summary-row { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .summary-row strong { color: var(--text); text-align: left; }
+    .summary-row.total { align-items: center; border: 0; color: var(--text); font-size: 18px; font-weight: 900; }
+    .summary-row.total strong { color: var(--blue); font-size: 24px; }
+    .discount-note { display: none; margin-top: 10px; padding: 10px; border-radius: 10px; color: var(--green); background: rgba(101,223,158,.08); }
+    .selected-design { margin-top: 13px; color: var(--muted); font-size: 14px; }
+    .selected-design strong { color: var(--blue); }
+
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
+    .step { padding: 19px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+    .step-number { display: grid; place-items: center; width: 39px; height: 39px; margin-bottom: 13px; border-radius: 11px; color: var(--blue); background: rgba(85,185,255,.12); font-weight: 900; }
+    .step h3 { margin: 0 0 8px; }
+    .step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+    .faq { display: grid; grid-template-columns: .8fr 1.2fr; gap: 24px; }
+    .faq-intro p { color: var(--muted); line-height: 1.8; }
+    details { margin-bottom: 10px; overflow: hidden; border: 1px solid var(--line); border-radius: 13px; background: var(--card); }
+    summary { padding: 16px; cursor: pointer; font-weight: 800; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; float: left; color: var(--blue); font-size: 20px; }
+    details[open] summary::after { content: "−"; }
+    details p { margin: 0; padding: 0 16px 16px; color: var(--muted); line-height: 1.8; }
+
+    .cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-block: 25px 55px;
+      padding: 28px;
+      border: 1px solid rgba(85,185,255,.2);
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(85,185,255,.15), rgba(29,92,160,.07)), var(--card);
+    }
+    .cta h2 { margin: 0 0 7px; }
+    .cta p { margin: 0; color: var(--muted); }
+
+    footer { padding: 25px 0; border-top: 1px solid var(--line); color: var(--muted); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+
+    .whatsapp {
+      position: fixed;
+      z-index: 30;
+      left: 18px;
+      bottom: 18px;
+      display: grid;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      color: white;
+      background: #20c86a;
+      font-size: 24px;
+      box-shadow: 0 12px 32px rgba(32,200,106,.3);
+      transition: .25s;
+    }
+    .whatsapp:hover { transform: translateY(-4px) scale(1.04); }
+
+    .toast {
+      position: fixed;
+      z-index: 50;
+      top: 88px;
+      right: 20px;
+      max-width: min(360px, calc(100% - 40px));
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+      box-shadow: 0 15px 40px rgba(0,0,0,.35);
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: .25s;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    .modal {
+      position: fixed;
+      z-index: 60;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(7px);
+    }
+    .modal.open { display: grid; }
+    .modal-card {
+      width: min(760px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #111722;
+      box-shadow: 0 25px 80px rgba(0,0,0,.5);
+    }
+    .modal-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 14px; }
+    .modal-head h2 { margin: 0; }
+    .close-btn { width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 10px; background: #0a0e15; cursor: pointer; }
+    .guide-list { display: grid; gap: 12px; }
+    .guide-step { padding: 14px; border: 1px solid var(--line); border-radius: 13px; background: #0c111a; }
+    .guide-step h3 { margin: 0 0 7px; color: var(--blue); }
+    .guide-step p { margin: 0; color: var(--muted); line-height: 1.8; }
+    .guide-warning { margin-top: 14px; padding: 13px; border-radius: 12px; color: #ffdb9c; background: rgba(255,190,75,.09); line-height: 1.7; }
+    .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 17px; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding-block: 42px; }
+      .hero-image { height: 380px; }
+      .category-grid { grid-template-columns: repeat(3, 1fr); }
+      .products { grid-template-columns: repeat(3, 1fr); }
+      .calculator { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .faq { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .container { width: min(100% - 24px, 1180px); }
+      .nav-inner { min-height: 66px; }
+      .brand { font-size: 18px; }
+      .brand-mark { width: 38px; height: 38px; }
+      .hero { gap: 25px; padding-block: 36px; }
+      h1 { font-size: 44px; }
+      .hero p { font-size: 15px; }
+      .hero-image { height: 290px; border-radius: 19px; }
+      .hero-actions .btn { flex: 1; }
+      .section { padding-block: 48px; }
+      .section-head { align-items: start; flex-direction: column; }
+      .category-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .category-card { height: 135px; }
+      .catalog-panel { padding: 13px; }
+      .catalog-toolbar { align-items: stretch; flex-direction: column; }
+      .search-input { width: 100%; }
+      .products { grid-template-columns: repeat(2, 1fr); gap: 9px; }
+      .product-image { height: 175px; }
+      .product-info { padding: 10px; }
+      .product-info h4 { font-size: 14px; }
+      .product-row { align-items: stretch; flex-direction: column; }
+      .select-design { width: 100%; }
+      .form-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .cta, .footer-inner { align-items: stretch; flex-direction: column; }
+      .cta .btn { width: 100%; }
+      .whatsapp { width: 52px; height: 52px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+    @media print {
+      body * { visibility: hidden !important; }
+      #guideModal, #guideModal * { visibility: visible !important; }
+      #guideModal { position: absolute; inset: 0; display: block !important; padding: 0; background: white; color: black; }
+      #guideModal .modal-card { width: 100%; max-height: none; overflow: visible; border: 0; box-shadow: none; background: white; color: black; }
+      #guideModal .guide-step, #guideModal .guide-warning { color: black; background: white; border: 1px solid #999; }
+      #guideModal .guide-step p, #guideModal .guide-warning { color: black; }
+      #guideModal .modal-actions, #guideModal .close-btn { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#" aria-label="X LINE الرئيسية">
+        <span class="brand-mark"><span>X</span></span>
+        <span>X LINE</span>
+      </a>
+      <nav class="nav-links" aria-label="القائمة الرئيسية">
+        <a href="#categories">التصنيفات</a>
+        <a href="#catalog">التصاميم</a>
+        <a href="#calculator">احسب مقاسك</a>
+        <a href="#installation">التركيب</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="searchFocusBtn" title="البحث عن تصميم" aria-label="البحث عن تصميم">⌕</button>
+        <button class="icon-btn" id="guideOpenBtn" title="كتالوج التركيب" aria-label="كتالوج التركيب">▤</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <div class="eyebrow">◆ طباعة خاصة حسب المقاس</div>
+        <h1>حوّل حائطك إلى <span class="blue-text">لوحة فنية</span></h1>
+        <p>اختر مناظر تناسب ذوقك أو اطلب طباعة صورتك الخاصة. أدخل مقاس الحائط بالسنتيمتر، واحصل على السعر مباشرة.</p>
+        <div class="price-line"><strong>450 جنيه</strong><span>للمتر المربع — الشحن مجاني</span></div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#categories">اختر التصميم ←</a>
+          <a class="btn btn-secondary" href="#calculator">احسب السعر</a>
         </div>
-        <div class="product-info">
-          <h4>${product.name}</h4>
-          <div class="product-row">
-            <span class="product-price">450 جنيه / م²</span>
-            <button class="select-design" type="button" data-name="${product.name}">
-              اختيار التصميم
-            </button>
+      </div>
+      <div class="hero-image" id="heroImage">
+        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=85" alt="غرفة بتصميم داخلي أنيق">
+        <div class="hero-badge"><small>خصم 5٪</small><strong>للطلبات الأكبر من 5 م²</strong></div>
+      </div>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>اختر التصنيف</h2>
+            <p>اضغط على أي صنف لعرض مجموعة من المناظر التابعة له.</p>
           </div>
         </div>
-      </article>
-    `).join("");
+        <div class="category-grid" id="categoryGrid"></div>
+      </div>
+    </section>
 
-    productsContainer.querySelectorAll(".select-design").forEach(button => {
-      button.addEventListener("click", () => {
-        selectedDesign = button.dataset.name;
-        selectedDesignElement.textContent = selectedDesign;
-        showToast("تم اختيار: " + selectedDesign);
-        document.getElementById("calculator").scrollIntoView({ behavior: "smooth" });
+    <section class="section" id="catalog">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>كتالوج التصاميم</h2>
+            <p>اختر منظرًا، ثم أدخل مقاس الحائط لحساب السعر.</p>
+          </div>
+        </div>
+        <div class="catalog-panel">
+          <div class="catalog-toolbar">
+            <div>
+              <h3 id="catalogTitle">كل التصاميم</h3>
+              <p id="catalogDescription">اختر مناظر من التصنيفات المختلفة.</p>
+            </div>
+            <input class="search-input" id="designSearch" type="search" placeholder="ابحث عن تصميم..." aria-label="ابحث عن تصميم">
+          </div>
+          <div class="products" id="products"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="calculator">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>احسب مقاس حائطك</h2>
+            <p>أدخل العرض والارتفاع بالسنتيمتر. سيتم حساب الخصم تلقائيًا عند تجاوز 5 م².</p>
+          </div>
+        </div>
+        <div class="calculator">
+          <div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="width">عرض الحائط (سم)</label>
+                <input id="width" type="number" min="1" value="300">
+              </div>
+              <div class="field">
+                <label for="height">ارتفاع الحائط (سم)</label>
+                <input id="height" type="number" min="1" value="250">
+              </div>
+            </div>
+            <label class="upload-box" for="roomImage">
+              <div>
+                <div style="font-size:28px;margin-bottom:7px">＋</div>
+                <strong>ارفع صورة الغرفة أو التصميم</strong>
+                <div style="font-size:13px;margin-top:6px">اختَر ملف صورة من جهازك للمعاينة</div>
+              </div>
+              <input id="roomImage" type="file" accept="image/*">
+            </label>
+            <img class="upload-preview" id="uploadPreview" alt="معاينة الصورة المرفوعة">
+          </div>
+          <div class="summary">
+            <div>
+              <div class="summary-row"><span>مساحة الحائط</span><strong id="area">7.50 م²</strong></div>
+              <div class="summary-row"><span>السعر قبل الخصم</span><strong id="subtotal">3,375 جنيه</strong></div>
+              <div class="summary-row"><span>الشحن</span><strong style="color:var(--green)">مجاني</strong></div>
+              <div class="summary-row"><span>الخصم</span><strong id="discount">168.75 جنيه</strong></div>
+              <div class="discount-note" id="discountNote">تم تطبيق خصم 5٪ لأن المساحة أكبر من 5 م².</div>
+              <div class="selected-design">التصميم المختار: <strong id="selectedDesign">لم يتم الاختيار بعد</strong></div>
+            </div>
+            <div>
+              <div class="summary-row total"><span>الإجمالي</span><strong id="total">3,206.25 جنيه</strong></div>
+              <button class="btn btn-primary" id="orderBtn" style="width:100%;margin-top:10px">اطلب عبر واتساب</button>
+              <p style="color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:0">الدفع يتم بالتواصل على واتساب، وتبدأ الطباعة بعد تأكيد الدفع.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="installation">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>كتالوج التركيب</h2>
+            <p>دليل مبسط لمساعدتك على تجهيز الحائط وتركيب الورق.</p>
+          </div>
+          <button class="btn btn-secondary" id="guideOpenBtn2">افتح دليل التركيب</button>
+        </div>
+        <div class="steps">
+          <article class="step"><div class="step-number">1</div><h3>جهّز الحائط</h3><p>نظّف السطح من الغبار والدهون، وتأكد أنه جاف ومستوي قبل التركيب.</p></article>
+          <article class="step"><div class="step-number">2</div><h3>راجع المقاس والقطع</h3><p>رتب الشرائح على الأرض بالترتيب، وتأكد من اتجاه التصميم ومطابقة الأجزاء.</p></article>
+          <article class="step"><div class="step-number">3</div><h3>ابدأ من خط مستقيم</h3><p>حدد خطًا رأسيًا باستخدام ميزان أو شاقول، ثم ثبّت أول شريحة بمحاذاته.</p></article>
+          <article class="step"><div class="step-number">4</div><h3>نعّم السطح</h3><p>مرر أداة ناعمة من المنتصف للخارج لطرد الهواء، ثم قص الزوائد بحذر.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <div><h2>أسئلة شائعة</h2><p>إجابات سريعة عن الطلب والتوصيل والتركيب.</p></div>
+        </div>
+        <div class="faq">
+          <div class="faq-intro">
+            <h3>تحتاج مساعدة في الطلب؟</h3>
+            <p>تواصل معنا على واتساب إذا كنت تحتاج مساعدة في اختيار التصميم أو إدخال المقاس أو تأكيد الدفع.</p>
+            <a class="btn btn-primary" href="https://wa.me/201208887256" target="_blank" rel="noopener">تواصل مع X LINE</a>
+          </div>
+          <div>
+            <details><summary>كيف يتم حساب السعر؟</summary><p>نحوّل العرض والارتفاع من سنتيمتر إلى متر مربع، ثم نضرب المساحة في 450 جنيهًا للمتر.</p></details>
+            <details><summary>متى أحصل على خصم 5٪؟</summary><p>يظهر الخصم تلقائيًا عندما تزيد مساحة الطلب عن 5 أمتار مربعة.</p></details>
+            <details><summary>هل الشحن مجاني؟ ومتى يصل الطلب؟</summary><p>الشحن مجاني لجميع المحافظات، ومدة الاستلام من 3 أيام إلى أسبوع كحد أقصى بعد تأكيد الطلب.</p></details>
+            <details><summary>كيف أدفع؟</summary><p>تواصل معنا عبر واتساب لتأكيد الدفع. يبدأ تجهيز الطباعة بعد تأكيد الدفع.</p></details>
+            <details><summary>هل توفرون خدمة تركيب؟</summary><p>لا نوفر خدمة تركيب، لكن يوجد كتالوج إرشادي مبسط داخل الموقع لطريقة التركيب.</p></details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container cta">
+      <div><h2>جاهز لتجديد حائطك؟</h2><p>اختر تصميمك، أدخل المقاس، واعرف السعر فورًا.</p></div>
+      <a class="btn btn-primary" href="#categories">ابدأ اختيار التصميم</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="brand" href="#"><span class="brand-mark"><span>X</span></span><span>X LINE</span></a>
+      <span>© <span id="year"></span> X LINE — جميع الحقوق محفوظة</span>
+      <span>الشحن مجاني لجميع المحافظات</span>
+    </div>
+  </footer>
+
+  <a class="whatsapp" href="https://wa.me/201208887256" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">◉</a>
+  <div class="toast" id="toast" role="status"></div>
+
+  <div class="modal" id="guideModal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="guideTitle">كتالوج تركيب ورق الحائط — X LINE</h2>
+        <button class="close-btn" id="guideCloseBtn" aria-label="إغلاق">✕</button>
+      </div>
+      <p style="color:var(--muted);line-height:1.8">هذا دليل إرشادي عام. اتبع تعليمات المادة اللاصقة ونوع ورق الحائط المرفق مع طلبك، واستعن بفني إذا كان الحائط غير مستوٍ أو يحتاج معالجة.</p>
+      <div class="guide-list">
+        <article class="guide-step"><h3>١. تجهيز الحائط</h3><p>أزل المسامير وبقايا الورق القديم. نظّف السطح واتركه يجف تمامًا. عالج الشقوق والنتوءات واجعل السطح ناعمًا وجافًا.</p></article>
+        <article class="guide-step"><h3>٢. قياس الشرائح وترتيبها</h3><p>راجع المقاس وعدد الشرائح واتجاه التصميم قبل وضع اللاصق. رتّب الشرائح على أرض نظيفة بالترتيب الصحيح، ولا تقص الزوائد إلا بعد تثبيت الورق.</p></article>
+        <article class="guide-step"><h3>٣. تحديد نقطة البداية</h3><p>استخدم ميزانًا أو شاقولًا لرسم خط رأسي مستقيم قرب بداية الحائط. لا تعتمد على زاوية الحائط وحدها فقد لا تكون مستقيمة.</p></article>
+        <article class="guide-step"><h3>٤. وضع اللاصق وتركيب الشريحة</h3><p>استخدم اللاصق المناسب لنوع الورق واتبع تعليمات العبوة. ثبّت أول شريحة بمحاذاة الخط، واترك هامشًا بسيطًا أعلى وأسفل للقص النهائي.</p></article>
+        <article class="guide-step"><h3>٥. مطابقة التصميم وإزالة الهواء</h3><p>قرّب الشريحة التالية لمطابقة الرسم دون شدّ الورق. مرر أداة تنعيم ناعمة من المنتصف إلى الأطراف لطرد الهواء واللاصق الزائد، وتجنب الأدوات الحادة على سطح الطباعة.</p></article>
+        <article class="guide-step"><h3>٦. إنهاء الحواف والتنظيف</h3><p>بعد تثبيت الشرائح، قص الزوائد بحذر باستخدام أداة حادة ومسطرة. امسح اللاصق الزائد بالطريقة المناسبة للخامة، واترك الورق يجف وفق تعليمات المنتج.</p></article>
+      </div>
+      <div class="guide-warning"><strong>تنبيه:</strong> لا تبدأ التركيب قبل التأكد من ترتيب الشرائح ومطابقة التصميم. لا تضع اللاصق على سطح الورق إلا إذا كانت تعليمات خامة المنتج تسمح بذلك.</div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" onclick="window.print()">طباعة / حفظ PDF</button>
+        <a class="btn btn-secondary" href="https://wa.me/201208887256" target="_blank" rel="noopener">اسألنا على واتساب</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const WHATSAPP = "201208887256";
+    const PRICE_PER_SQM = 450;
+    const DISCOUNT_THRESHOLD = 5;
+    const DISCOUNT_RATE = 0.05;
+
+    const categories = [
+      { id: "sunset", name: "غروب الجبال", image: "photo-1470252649378-9c29740c9fa8" },
+      { id: "nature", name: "الطبيعة والغابات", image: "photo-1441974231531-c6227db76b6e" },
+      { id: "modern", name: "مودرن", image: "photo-1600210492486-724fe5c67fb0" },
+      { id: "classic", name: "كلاسيك وأنيق", image: "photo-1511818966892-d7d671e672a2" },
+      { id: "kids", name: "عالم الأطفال", image: "photo-1534796636912-3b95b3ab5986" },
+      { id: "abstract", name: "فن تجريدي", image: "photo-1549490349-8643362247b5" },
+      { id: "floral", name: "زهور ونباتات", image: "photo-1497250681960-ef046c08a56e" },
+      { id: "architecture", name: "مدن ومعمار", image: "photo-1511818966892-d7d671e672a2" }
+    ];
+
+    const photo = (id) =>
+      `https://images.unsplash.com/${id}?auto=format&fit=crop&w=850&q=82`;
+
+    const products = [
+      { name: "غروب ذهبي فوق الجبال", category: "sunset", image: "photo-1470252649378-9c29740c9fa8" },
+      { name: "وادي عند الغروب", category: "sunset", image: "photo-1500530855697-b586d89ba3ee" },
+      { name: "قمم الجبال والضباب", category: "sunset", image: "photo-1464822759023-fed622ff2c3b" },
+      { name: "سماء وردية فوق الجبل", category: "sunset", image: "photo-1470770841072-f978cf4d019e" },
+      { name: "غابة خضراء", category: "nature", image: "photo-1441974231531-c6227db76b6e" },
+      { name: "طريق وسط الأشجار", category: "nature", image: "photo-1448375240586-882707db888b" },
+      { name: "أوراق استوائية", category: "nature", image: "photo-1497250681960-ef046c08a56e" },
+      { name: "شلال وسط الطبيعة", category: "nature", image: "photo-1433086966358-54859d0ed716" },
+      { name: "غرفة مودرن هادئة", category: "modern", image: "photo-1600210492486-724fe5c67fb0" },
+      { name: "تصميم داخلي معاصر", category: "modern", image: "photo-1616486338812-3dadae4b4ace" },
+      { name: "ديكور بخطوط بسيطة", category: "modern", image: "photo-1618221195710-dd6b41faaea6" },
+      { name: "لمسات عصرية", category: "modern", image: "photo-1600607687939-ce8a6c25118c" },
+      { name: "معمار كلاسيكي", category: "classic", image: "photo-1511818966892-d7d671e672a2" },
+      { name: "زخارف معمارية", category: "classic", image: "photo-1600607687920-4e2a09cf159d" },
+      { name: "أناقة كلاسيكية", category: "classic", image: "photo-1600566753086-00f18fb6b3ea" },
+      { name: "تفاصيل فاخرة", category: "classic", image: "photo-1600210492486-724fe5c67fb0" },
+      { name: "سماء ونجوم", category: "kids", image: "photo-1534796636912-3b95b3ab5986" },
+      { name: "عالم الفضاء", category: "kids", image: "photo-1446776811953-b23d57bd21aa" },
+      { name: "مغامرة في الطبيعة", category: "kids", image: "photo-1500530855697-b586d89ba3ee" },
+      { name: "ألوان مرحة", category: "kids", image: "photo-1549490349-8643362247b5" },
+      { name: "لوحة تجريدية زرقاء", category: "abstract", image: "photo-1549490349-8643362247b5" },
+      { name: "تدرجات فنية", category: "abstract", image: "photo-1547891654-e66ed7ebb968" },
+      { name: "فن بألوان هادئة", category: "abstract", image: "photo-1541961017774-22349e4a1262" },
+      { name: "أشكال تجريدية", category: "abstract", image: "photo-1541701494587-cb58502866ab" },
+      { name: "أوراق استوائية خضراء", category: "floral", image: "photo-1497250681960-ef046c08a56e" },
+      { name: "حديقة زهور", category: "floral", image: "photo-1490750967868-88aa4486c946" },
+      { name: "نباتات على خلفية داكنة", category: "floral", image: "photo-1501004318641-b39e6451bec6" },
+      { name: "أغصان طبيعية", category: "floral", image: "photo-1487530811176-3780de880c2d" },
+      { name: "مدينة من منظور علوي", category: "architecture", image: "photo-1511818966892-d7d671e672a2" },
+      { name: "مبانٍ عصرية", category: "architecture", image: "photo-1486406146926-c627a92ad1ab" },
+      { name: "شوارع المدينة", category: "architecture", image: "photo-1519608487953-e999c86e7455" },
+      { name: "أقواس معمارية", category: "architecture", image: "photo-1511818966892-d7d671e672a2" }
+    ];
+
+    const categoryGrid = document.getElementById("categoryGrid");
+    const productsContainer = document.getElementById("products");
+    const catalogTitle = document.getElementById("catalogTitle");
+    const catalogDescription = document.getElementById("catalogDescription");
+    const searchInput = document.getElementById("designSearch");
+    const selectedDesignElement = document.getElementById("selectedDesign");
+    let activeCategory = "all";
+    let selectedDesign = "";
+
+    function renderCategories() {
+      categoryGrid.innerHTML = categories.map(category => `
+        <button class="category-card" type="button" data-category="${category.id}" aria-label="عرض تصاميم ${category.name}">
+          <img src="${photo(category.image)}" alt="${category.name}" loading="lazy">
+          <span>${category.name} <small>←</small></span>
+        </button>
+      `).join("");
+
+      categoryGrid.querySelectorAll(".category-card").forEach(card => {
+        card.addEventListener("click", () => selectCategory(card.dataset.category));
       });
+    }
+
+    function renderProducts() {
+      const term = searchInput.value.trim().toLowerCase();
+      const visibleProducts = products.filter(product => {
+        const matchesCategory = activeCategory === "all" || product.category === activeCategory;
+        const matchesSearch = product.name.toLowerCase().includes(term);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (!visibleProducts.length) {
+        productsContainer.innerHTML = '<div class="empty-state">لا توجد تصاميم مطابقة. جرب كلمة بحث أخرى.</div>';
+        return;
+      }
+
+      productsContainer.innerHTML = visibleProducts.map(product => `
+        <article class="product-card">
+          <div class="product-image">
+            <img src="${photo(product.image)}" alt="${product.name}" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h4>${product.name}</h4>
+            <div class="product-row">
+              <span class="product-price">450 جنيه / م²</span>
+              <button class="select-design" type="button" data-name="${product.name}">اختيار التصميم</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      productsContainer.querySelectorAll(".select-design").forEach(button => {
+        button.addEventListener("click", () => {
+          selectedDesign = button.dataset.name;
+          selectedDesignElement.textContent = selectedDesign;
+          showToast("تم اختيار: " + selectedDesign);
+          document.getElementById("calculator").scrollIntoView({ behavior: "smooth" });
+        });
+      });
+    }
+
+    function selectCategory(categoryId) {
+      activeCategory = categoryId;
+      const category = categories.find(item => item.id === categoryId);
+      catalogTitle.textContent = category ? category.name : "كل التصاميم";
+      catalogDescription.textContent = category
+        ? `تصفح المناظر المتاحة ضمن تصنيف ${category.name} واختر التصميم المناسب.`
+        : "اختر مناظر من التصنيفات المختلفة.";
+      searchInput.value = "";
+      renderProducts();
+      document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function formatMoney(value) {
+      return value.toLocaleString("ar-EG", { maximumFractionDigits: 2 }) + " جنيه";
+    }
+
+    function updateCalculator() {
+      const width = Math.max(0, Number(document.getElementById("width").value) || 0);
+      const height = Math.max(0, Number(document.getElementById("height").value) || 0);
+      const area = (width * height) / 10000;
+      const subtotal = area * PRICE_PER_SQM;
+      const discount = area > DISCOUNT_THRESHOLD ? subtotal * DISCOUNT_RATE : 0;
+      const total = subtotal - discount;
+
+      document.getElementById("area").textContent = area.toFixed(2) + " م²";
+      document.getElementById("subtotal").textContent = formatMoney(subtotal);
+      document.getElementById("discount").textContent = formatMoney(discount);
+      document.getElementById("total").textContent = formatMoney(total);
+      document.getElementById("discountNote").style.display = discount > 0 ? "block" : "none";
+    }
+
+    document.getElementById("width").addEventListener("input", updateCalculator);
+    document.getElementById("height").addEventListener("input", updateCalculator);
+    updateCalculator();
+
+    document.getElementById("roomImage").addEventListener("change", function () {
+      const file = this.files && this.files[0];
+      if (!file) return;
+      if (!file.type.startsWith("image/")) {
+        showToast("من فضلك اختر ملف صورة.");
+        this.value = "";
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = event => {
+        const preview = document.getElementById("uploadPreview");
+        preview.src = event.target.result;
+        preview.style.display = "block";
+        showToast("تم عرض صورة المعاينة على جهازك.");
+      };
+      reader.readAsDataURL(file);
     });
-  }
 
-  function selectCategory(categoryId) {
-    activeCategory = categoryId;
-    const category = categories.find(item => item.id === categoryId);
+    document.getElementById("orderBtn").addEventListener("click", () => {
+      const width = Number(document.getElementById("width").value) || 0;
+      const height = Number(document.getElementById("height").value) || 0;
+      if (width <= 0 || height <= 0) {
+        showToast("أدخل عرض وارتفاع الحائط أولًا.");
+        return;
+      }
+      const area = width * height / 10000;
+      const subtotal = area * PRICE_PER_SQM;
+      const discount = area > DISCOUNT_THRESHOLD ? subtotal * DISCOUNT_RATE : 0;
+      const total = subtotal - discount;
+      const message = [
+        "مرحبًا X LINE، أريد الاستفسار عن طلب ورق حائط:",
+        "التصميم: " + (selectedDesign || "تصميم خاص / لم أختَر تصميمًا بعد"),
+        "العرض: " + width + " سم",
+        "الارتفاع: " + height + " سم",
+        "المساحة: " + area.toFixed(2) + " م²",
+        "السعر قبل الخصم: " + subtotal.toFixed(2) + " جنيه",
+        "الخصم: " + discount.toFixed(2) + " جنيه",
+        "الإجمالي: " + total.toFixed(2) + " جنيه",
+        "أرجو توضيح طريقة الدفع وتأكيد الطلب."
+      ].join("\n");
+      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+    });
 
-    catalogTitle.textContent = category ? category.name : "كل التصاميم";
-    catalogDescription.textContent = category
-      ? `تصفح تصاميم ${category.name} واختر التصميم المناسب لك.`
-      : "اختر من التصاميم المتاحة في جميع الأصناف.";
+    searchInput.addEventListener("input", renderProducts);
 
-    searchInput.value = "";
+    document.getElementById("searchFocusBtn").addEventListener("click", () => {
+      document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => searchInput.focus(), 450);
+    });
+
+    const guideModal = document.getElementById("guideModal");
+    function openGuide() { guideModal.classList.add("open"); document.body.style.overflow = "hidden"; }
+    function closeGuide() { guideModal.classList.remove("open"); document.body.style.overflow = ""; }
+    document.getElementById("guideOpenBtn").addEventListener("click", openGuide);
+    document.getElementById("guideOpenBtn2").addEventListener("click", openGuide);
+    document.getElementById("guideCloseBtn").addEventListener("click", closeGuide);
+    guideModal.addEventListener("click", event => { if (event.target === guideModal) closeGuide(); });
+    document.addEventListener("keydown", event => { if (event.key === "Escape") closeGuide(); });
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2400);
+    }
+
+    const heroImage = document.getElementById("heroImage");
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      heroImage.addEventListener("mousemove", event => {
+        const rect = heroImage.getBoundingClientRect();
+        const rotateY = ((event.clientX - rect.left) / rect.width - .5) * 3;
+        const rotateX = ((event.clientY - rect.top) / rect.height - .5) * -3;
+        heroImage.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      heroImage.addEventListener("mouseleave", () => { heroImage.style.transform = ""; });
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderCategories();
     renderProducts();
-    document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
-  }
-
-  function formatMoney(value) {
-    return value.toLocaleString("ar-EG", { maximumFractionDigits: 2 }) + " جنيه";
-  }
-
-  function updateCalculator() {
-    const width = Math.max(0, Number(document.getElementById("width").value) || 0);
-    const height = Math.max(0, Number(document.getElementById("height").value) || 0);
-    const area = (width * height) / 10000;
-    const subtotal = area * PRICE_PER_SQM;
-    const discount = area > DISCOUNT_THRESHOLD ? subtotal * DISCOUNT_RATE : 0;
-    const total = subtotal - discount;
-
-    document.getElementById("area").textContent = area.toFixed(2) + " م²";
-    document.getElementById("subtotal").textContent = formatMoney(subtotal);
-    document.getElementById("discount").textContent = formatMoney(discount);
-    document.getElementById("total").textContent = formatMoney(total);
-    document.getElementById("discountNote").style.display =
-      discount > 0 ? "block" : "none";
-  }
-
-  document.getElementById("width").addEventListener("input", updateCalculator);
-  document.getElementById("height").addEventListener("input", updateCalculator);
-  updateCalculator();
-
-  document.getElementById("roomImage").addEventListener("change", function () {
-    const file = this.files && this.files[0];
-    if (!file) return;
-
-    if (!file.type.startsWith("image/")) {
-      showToast("من فضلك اختر ملف صورة.");
-      this.value = "";
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = event => {
-      const preview = document.getElementById("uploadPreview");
-      preview.src = event.target.result;
-      preview.style.display = "block";
-      showToast("تم عرض صورة المعاينة على جهازك.");
-    };
-    reader.readAsDataURL(file);
-  });
-
-  document.getElementById("orderBtn").addEventListener("click", () => {
-    const width = Number(document.getElementById("width").value) || 0;
-    const height = Number(document.getElementById("height").value) || 0;
-
-    if (width <= 0 || height <= 0) {
-      showToast("أدخل عرض وارتفاع الحائط أولًا.");
-      return;
-    }
-
-    const area = (width * height) / 10000;
-    const subtotal = area * PRICE_PER_SQM;
-    const discount = area > DISCOUNT_THRESHOLD ? subtotal * DISCOUNT_RATE : 0;
-    const total = subtotal - discount;
-
-    const message = [
-      "مرحبًا X LINE، أريد الاستفسار عن طلب ورق حائط:",
-      "التصنيف: " + (categories.find(item => item.id === activeCategory)?.name || "غير محدد"),
-      "التصميم: " + (selectedDesign || "تصميم خاص / لم أختَر تصميمًا بعد"),
-      "العرض: " + width + " سم",
-      "الارتفاع: " + height + " سم",
-      "المساحة: " + area.toFixed(2) + " م²",
-      "السعر قبل الخصم: " + subtotal.toFixed(2) + " جنيه",
-      "الخصم: " + discount.toFixed(2) + " جنيه",
-      "الإجمالي: " + total.toFixed(2) + " جنيه",
-      "أرجو توضيح طريقة الدفع وتأكيد الطلب."
-    ].join("\n");
-
-    window.open(
-      `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`,
-      "_blank",
-      "noopener"
-    );
-  });
-
-  searchInput.addEventListener("input", renderProducts);
-
-  document.getElementById("searchFocusBtn").addEventListener("click", () => {
-    document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
-    setTimeout(() => searchInput.focus(), 450);
-  });
-
-  const guideModal = document.getElementById("guideModal");
-
-  function openGuide() {
-    guideModal.classList.add("open");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeGuide() {
-    guideModal.classList.remove("open");
-    document.body.style.overflow = "";
-  }
-
-  document.getElementById("guideOpenBtn").addEventListener("click", openGuide);
-  document.getElementById("guideOpenBtn2").addEventListener("click", openGuide);
-  document.getElementById("guideCloseBtn").addEventListener("click", closeGuide);
-
-  guideModal.addEventListener("click", event => {
-    if (event.target === guideModal) closeGuide();
-  });
-
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") closeGuide();
-  });
-
-  function showToast(message) {
-    const toast = document.getElementById("toast");
-    toast.textContent = message;
-    toast.classList.add("show");
-    clearTimeout(showToast.timer);
-    showToast.timer = setTimeout(() => toast.classList.remove("show"), 2400);
-  }
-
-  const heroImage = document.getElementById("heroImage");
-
-  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-    heroImage.addEventListener("mousemove", event => {
-      const rect = heroImage.getBoundingClientRect();
-      const rotateY = ((event.clientX - rect.left) / rect.width - 0.5) * 3;
-      const rotateX = ((event.clientY - rect.top) / rect.height - 0.5) * -3;
-      heroImage.style.transform =
-        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-
-    heroImage.addEventListener("mouseleave", () => {
-      heroImage.style.transform = "";
-    });
-  }
-
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  renderCategories();
-  renderProducts();
-</script>
+  </script>
+</body>
+</html>
