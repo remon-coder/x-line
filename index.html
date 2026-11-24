@@ -33,7 +33,6 @@
     a { color:inherit; text-decoration:none; }
     img { display:block; width:100%; }
     button,input { font:inherit; }
-
     .container { width:min(1180px,calc(100% - 28px)); margin-inline:auto; }
 
     .nav {
@@ -42,7 +41,10 @@
       backdrop-filter:blur(14px);
       border-bottom:1px solid var(--line);
     }
-    .nav-inner { min-height:70px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .nav-inner {
+      min-height:70px; display:flex; align-items:center;
+      justify-content:space-between; gap:16px;
+    }
     .brand { display:flex; align-items:center; gap:10px; font-size:21px; font-weight:900; }
     .brand-mark {
       width:40px; height:40px; display:grid; place-items:center;
@@ -86,11 +88,11 @@
     .section h2 { margin:0 0 8px; font-size:clamp(28px,4vw,40px); }
     .section-description { margin:0 0 22px; color:var(--muted); }
 
-    /* ===== كروت الأصناف ===== */
     .category-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
     .category-card {
       position:relative; height:200px; overflow:hidden;
-      border:1px solid var(--line); border-radius:16px; background:var(--card); transition:.25s;
+      border:1px solid var(--line); border-radius:16px;
+      background:var(--card); transition:.25s;
     }
     .category-card:hover { border-color:rgba(85,185,255,.5); }
     .category-card img { height:100%; object-fit:cover; transition:.35s; }
@@ -107,26 +109,33 @@
     .category-text strong { display:block; font-size:18px; font-weight:900; }
     .category-text small { display:block; margin-top:3px; color:var(--blue); font-size:13px; font-weight:700; }
 
-    /* ===== صفحة الصنف ===== */
     .catalog-page { min-height:70vh; padding-block:38px 70px; }
     .page-top { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:18px; }
     .page-top h1 { margin:0 0 7px; font-size:clamp(30px,5vw,44px); }
     .page-top p { margin:0; color:var(--muted); line-height:1.7; }
     .back {
       min-height:42px; display:inline-flex; align-items:center; padding:0 13px;
-      border:1px solid var(--line); border-radius:10px; background:var(--card); white-space:nowrap;
+      border:1px solid var(--line); border-radius:10px;
+      background:var(--card); white-space:nowrap;
     }
 
     .chips { display:flex; gap:8px; margin-bottom:20px; overflow-x:auto; padding-bottom:4px; }
     .chip {
-      flex:0 0 auto; padding:8px 14px; border:1px solid var(--line); border-radius:30px;
-      background:var(--card); color:var(--muted); font-weight:700; font-size:14px;
+      flex:0 0 auto; padding:8px 14px; border:1px solid var(--line);
+      border-radius:30px; background:var(--card); color:var(--muted);
+      font-weight:700; font-size:14px;
     }
     .chip:hover { color:var(--text); }
     .chip.active { color:#06101c; background:var(--blue); border-color:var(--blue); }
 
-    .panel { padding:18px; border:1px solid var(--line); border-radius:20px; background:rgba(17,23,34,.78); }
-    .toolbar { display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:17px; }
+    .panel {
+      padding:18px; border:1px solid var(--line); border-radius:20px;
+      background:rgba(17,23,34,.78);
+    }
+    .toolbar {
+      display:flex; justify-content:space-between; align-items:center;
+      gap:14px; margin-bottom:17px;
+    }
     .toolbar h2 { margin:0 0 5px; font-size:22px; }
     .toolbar p { margin:0; color:var(--muted); }
     .search {
@@ -155,15 +164,17 @@
       color:var(--blue); background:rgba(85,185,255,.08); white-space:nowrap;
     }
     .choose:hover { background:rgba(85,185,255,.18); }
-    .empty { grid-column:1/-1; padding:24px; color:var(--muted); text-align:center; }
+    .empty { grid-column:1/-1; padding:24px; color:var(--muted); text-align:center; line-height:1.8; }
 
-    /* ===== معاينة الصورة ===== */
     .lightbox {
       position:fixed; inset:0; z-index:50; display:grid; place-items:center;
       padding:20px; background:rgba(4,6,10,.92);
     }
     .lightbox figure { margin:0; max-width:min(900px,100%); }
-    .lightbox img { width:auto; max-width:100%; max-height:76vh; margin-inline:auto; border-radius:14px; }
+    .lightbox img {
+      width:auto; max-width:100%; max-height:76vh;
+      margin-inline:auto; border-radius:14px;
+    }
     .lightbox figcaption { margin-top:14px; text-align:center; font-weight:800; }
     .lightbox figcaption a {
       display:inline-block; margin-top:10px; padding:10px 16px; border-radius:10px;
@@ -178,7 +189,6 @@
     .lb-prev { right:16px; top:50%; }
     .lb-next { left:16px; top:50%; }
 
-    /* ===== الحاسبة وباقي الأقسام ===== */
     .calculator {
       display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:18px;
       border:1px solid var(--line); border-radius:18px; background:var(--card);
@@ -271,7 +281,6 @@
     </div>
   </header>
 
-  <!-- ================= الصفحة الرئيسية ================= -->
   <main id="homeView">
     <section class="container hero">
       <div>
@@ -286,7 +295,7 @@
       </div>
 
       <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=85" alt="غرفة بتصميم داخلي">
+        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="غرفة بتصميم داخلي">
       </div>
     </section>
 
@@ -320,7 +329,7 @@
           <div class="summary-row"><span>الخصم</span><strong id="discount"></strong></div>
           <div class="selected">التصميم المختار: <strong id="selectedDesign">لم يتم الاختيار بعد</strong></div>
           <div class="summary-row total"><span>الإجمالي</span><strong id="total"></strong></div>
-          <button class="btn primary" id="orderBtn">اطلب عبر واتساب</button>
+          <button class="btn primary" id="orderBtn" type="button">اطلب عبر واتساب</button>
         </div>
       </div>
     </section>
@@ -352,7 +361,6 @@
     </section>
   </main>
 
-  <!-- ================= صفحة الصنف ================= -->
   <main class="container catalog-page" id="categoryView" hidden>
     <div class="page-top">
       <div>
@@ -376,11 +384,10 @@
     </div>
   </main>
 
-  <!-- معاينة الصورة -->
   <div class="lightbox" id="lightbox" hidden>
-    <button class="lb-btn lb-close" id="lbClose" aria-label="إغلاق">✕</button>
-    <button class="lb-btn lb-prev" id="lbPrev" aria-label="السابق">›</button>
-    <button class="lb-btn lb-next" id="lbNext" aria-label="التالي">‹</button>
+    <button class="lb-btn lb-close" id="lbClose" aria-label="إغلاق" type="button">✕</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="السابق" type="button">›</button>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="التالي" type="button">‹</button>
     <figure>
       <img id="lbImg" src="" alt="">
       <figcaption>
@@ -404,164 +411,288 @@
 
     const PRICE = 450;
     const WHATSAPP = "201208887256";
+    const STORE = "https://artehubb.com";
 
-    /* صور احتياطية بتظهر لو مفيش صورة محلية للتصميم */
-    const fallbackIds = [
-      "photo-1618221195710-dd6b41faaea6","photo-1600607687939-ce8a6c25118c",
-      "photo-1600210492486-724fe5c67fb0","photo-1600607687920-4e2a09cf159d",
-      "photo-1600566753086-00f18fb6b3ea","photo-1616486338812-3dadae4b4ace",
-      "photo-1534796636912-3b95b3ab5986","photo-1446776811953-b23d57bd21aa",
-      "photo-1441974231531-c6227db76b6e","photo-1549490349-8643362247b5",
-      "photo-1470770841072-f978cf4d019e","photo-1470252649378-9c29740c9fa8",
-      "photo-1500530855697-b586d89ba3ee","photo-1464822759023-fed622ff2c3b",
-      "photo-1433086966358-54859d0ed716","photo-1497250681960-ef046c08a56e",
-      "photo-1501004318641-b39e6451bec6","photo-1487530811176-3780de880c2d",
-      "photo-1490750967868-88aa4486c946","photo-1513519245088-0e12902e5a38"
-    ];
-
-    /* الأصناف بنفس ترتيب Artehub */
     const categories = [
-      { id:"interior-panels", name:"Interior Panels", tag:"بانلز", desc:"بانلز حائط بمظهر مرتب ومعاصر", offset:0, names:["Velour","Bravura","Celestia","Ornamenta","Walnera","Linear Luxe","LuxeCraft","Aurum","Eterna","Mahoro","Modern Rhythm","Soft Geometry"] },
-      { id:"calligraphy", name:"Calligraphy", tag:"خط عربي", desc:"تصميمات خط عربي وديكور شرقي", offset:3, names:["خط عربي ذهبي","نقوش شرقية","لمسة عربية","زخرفة كلاسيكية","فن شرقي أنيق","حروف عربية","لوحة خطية","نقش تراثي","خط ديواني","كلمات ملهمة","زخارف عربية","Calligraphy Luxe"] },
-      { id:"kids", name:"Kids", tag:"Kids", desc:"تصميمات مرحة ومبهجة لغرف الأطفال", offset:6, names:["Bubbly","Toyria","Playful Spots","Cheerio","Unicorn","عالم النجوم","مغامرات الفضاء","غابة الأحلام","ألوان مرحة","سماء بنفسجية","حيوانات الغابة","بالونات وأحلام"] },
-      { id:"mural", name:"Mural", tag:"Mural", desc:"مشاهد جدارية كبيرة للطبيعة والفن", offset:9, names:["غروب الجبال","وادي الطبيعة","قمم وضباب","غابة استوائية","شلال هادئ","حديقة خضراء","سماء وردية","طبيعة ساحرة","مشهد بحري","مدينة قديمة","أقواس معمارية","Mural Art"] },
-      { id:"leaves", name:"Leaves", tag:"Leaves", desc:"أوراق ونباتات خضراء", offset:5, names:["أوراق استوائية","نباتات خضراء","أغصان طبيعية","حديقة هادئة","لمسات نباتية","أوراق مونستيرا","غابة استوائية","زهور وأوراق","نباتات داكنة","أوراق زيتونية","طبيعة ناعمة","Leaves Luxe"] },
-      { id:"concrete", name:"Concrete", tag:"Concrete", desc:"ستايل مودرن بملمس الخرسانة", offset:2, names:["خرسانة ناعمة","ملمس رمادي","ستايل صناعي","خرسانة عصرية","رمادي أنيق","إسمنت فاتح","إسمنت داكن","ملمس حجري","خرسانة دافئة","جدار صناعي","ستايل خام","Concrete Luxe"] },
-      { id:"wood", name:"Wood", tag:"Wood", desc:"تصميمات خشب طبيعية وعصرية", offset:15, names:["خشب طبيعي","ألواح خشبية","خشب دافئ","خطوط خشبية","خشب عصري","خشب فاتح","خشب داكن","ألواح ريفية","خشب بلوط","خشب جوز","شرائح خشبية","Wood Luxe"] },
-      { id:"marble", name:"Marble", tag:"Marble", desc:"رخام أنيق بلمسة فاخرة", offset:12, names:["رخام أبيض","رخام بعروق ذهبية","رخام رمادي","رخام فاخر","رخام هادئ","رخام أسود","رخام بيج","Calacatta","رخام كلاسيكي","رخام عصري","لمسات حجرية","Marble Luxe"] }
+      { id:"interior-panels", name:"Interior Panels", tag:"بانلز", desc:"تصميمات بانلز حائط بمظهر مرتب وعصري." },
+      { id:"calligraphy", name:"Calligraphy", tag:"خط عربي", desc:"تصميمات خط عربي وديكور شرقي." },
+      { id:"kids-1", name:"Kids", tag:"أطفال", desc:"تصميمات مرحة ومبهجة لغرف الأطفال." },
+      { id:"mural", name:"Mural", tag:"جداريات", desc:"مشاهد جدارية كبيرة تغيّر إحساس المساحة." },
+      { id:"tropical-paradise", name:"Leaves", tag:"طبيعة استوائية", desc:"تصميمات نباتية وأجواء استوائية." },
+      { id:"concrete", name:"Concrete", tag:"خرسانة", desc:"ستايل مودرن بملمس الخرسانة." },
+      { id:"wood", name:"Wood", tag:"خشب", desc:"تصميمات خشبية طبيعية وعصرية." },
+      { id:"marble", name:"Marble", tag:"رخام", desc:"تصميمات رخام أنيقة بلمسة فاخرة." }
     ];
-
-    /* الصورة المحلية: images/<id>/<رقم>.jpg — وصورة الغلاف: images/<id>/cover.jpg */
-    function fallbackPhoto(category, index, width) {
-      const id = fallbackIds[(category.offset + index) % fallbackIds.length];
-      return "https://images.unsplash.com/" + id + "?auto=format&fit=crop&w=" + width + "&q=82";
-    }
-
-    function imgTag(src, fallback, alt, extra) {
-      return '<img src="' + src + '" alt="' + alt + '" ' + (extra || "") +
-        ' onerror="this.onerror=null;this.src=\'' + fallback + '\'">';
-    }
 
     const params = new URLSearchParams(location.search);
     const home = document.getElementById("homeView");
     const page = document.getElementById("categoryView");
+    const categoryGrid = document.getElementById("categoryGrid");
     const productsEl = document.getElementById("products");
     const searchEl = document.getElementById("search");
-    const selectedDesign = params.get("design") || "";
+    const productsByCategory = new Map();
 
-    /* ---- كروت الأصناف ---- */
-    document.getElementById("categoryGrid").innerHTML = categories.map((category, index) => `
-      <a class="category-card" href="?category=${encodeURIComponent(category.id)}">
-        ${imgTag("images/" + category.id + "/cover.jpg", fallbackPhoto(category, 0, 900), category.name, 'loading="lazy"')}
-        <span class="category-num">${String(index + 1).padStart(2, "0")}</span>
-        <div class="category-text">
-          <strong>${category.name}</strong>
-          <small>${category.tag} ←</small>
-        </div>
-      </a>
-    `).join("");
+    let activeCategory = null;
+    let visibleProducts = [];
+    let lightboxIndex = 0;
 
-    /* ---- صفحة الصنف ---- */
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+      }[char]));
+    }
+
+    function placeholderImage(label) {
+      const text = escapeHtml(label);
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650">
+        <rect width="100%" height="100%" fill="#111722"/>
+        <text x="50%" y="50%" fill="#aeb8c7" font-size="32"
+          font-family="Arial" text-anchor="middle">${text}</text>
+      </svg>`;
+      return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+    }
+
+    function imageMarkup(src, alt) {
+      const fallback = placeholderImage(alt);
+      return `<img src="${escapeHtml(src || fallback)}" alt="${escapeHtml(alt)}"
+        loading="lazy" onerror="this.onerror=null;this.src='${fallback}'">`;
+    }
+
+    function renderCategories() {
+      categoryGrid.innerHTML = categories.map((category, index) => {
+        const products = productsByCategory.get(category.id) || [];
+        const cover = products.find(product => product.src)?.src || placeholderImage(category.name);
+
+        return `
+          <a class="category-card" href="?category=${encodeURIComponent(category.id)}">
+            ${imageMarkup(cover, category.name)}
+            <span class="category-num">${String(index + 1).padStart(2, "0")}</span>
+            <div class="category-text">
+              <strong>${escapeHtml(category.name)}</strong>
+              <small>${escapeHtml(category.tag)} ←</small>
+            </div>
+          </a>
+        `;
+      }).join("");
+    }
+
+    async function fetchProducts(category) {
+      const allProducts = [];
+      const seen = new Set();
+
+      for (let pageNumber = 1; pageNumber <= 20; pageNumber++) {
+        const url = `${STORE}/collections/${encodeURIComponent(category.id)}/products.json?limit=250&page=${pageNumber}`;
+        const response = await fetch(url, { headers:{ "Accept":"application/json" } });
+
+        if (!response.ok) {
+          if (pageNumber === 1) throw new Error(`تعذر تحميل التصنيف (${response.status})`);
+          break;
+        }
+
+        const data = await response.json();
+        const batch = Array.isArray(data.products) ? data.products : [];
+        if (!batch.length) break;
+
+        for (const product of batch) {
+          const key = String(product.id || product.handle || product.title);
+          if (seen.has(key)) continue;
+          seen.add(key);
+
+          const images = Array.isArray(product.images) ? product.images : [];
+          const firstImage = images[0];
+          const imageUrl = typeof firstImage === "string"
+            ? firstImage
+            : firstImage?.src || product.featured_image || "";
+
+          allProducts.push({
+            id:key,
+            name:product.title || "تصميم ورق حائط",
+            src:imageUrl
+          });
+        }
+
+        if (batch.length < 250) break;
+      }
+
+      return allProducts;
+    }
+
+    function renderProducts(items) {
+      visibleProducts = items;
+
+      if (!items.length) {
+        productsEl.innerHTML = `
+          <div class="empty">
+            مفيش منتجات ظهرت في التصنيف ده. ممكن رابط التصنيف غير صحيح
+            أو الموقع مانع تحميل بياناته من صفحة تانية.
+          </div>`;
+        return;
+      }
+
+      productsEl.innerHTML = items.map((item, index) => `
+        <article class="product">
+          <div class="product-image" data-open="${index}">
+            ${imageMarkup(item.src, item.name)}
+          </div>
+          <div class="product-info">
+            <h3>${escapeHtml(item.name)}</h3>
+            <div class="product-row">
+              <span class="price">${PRICE} جنيه / م²</span>
+              <a class="choose" href="./?design=${encodeURIComponent(item.name)}#calculator">
+                اختيار التصميم
+              </a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
     function showCategory(category) {
+      activeCategory = category;
       home.hidden = true;
       page.hidden = false;
       document.title = "تصاميم " + category.name + " | X LINE";
       document.getElementById("categoryTitle").textContent = category.name;
       document.getElementById("categoryDescription").textContent = category.desc;
-      document.getElementById("designCount").textContent = category.names.length + " تصميم";
 
       document.getElementById("chips").innerHTML = categories.map(item => `
         <a class="chip ${item.id === category.id ? "active" : ""}"
-           href="?category=${encodeURIComponent(item.id)}">${item.name}</a>
+           href="?category=${encodeURIComponent(item.id)}">
+          ${escapeHtml(item.name)}
+        </a>
       `).join("");
 
-      const list = category.names.map((name, index) => ({
-        name,
-        src: "images/" + category.id + "/" + (index + 1) + ".jpg",
-        fallback: fallbackPhoto(category, index + 2, 1000)
-      }));
-
-      let shown = list;
-
-      function render(items) {
-        shown = items;
-
-        if (!items.length) {
-          productsEl.innerHTML = '<div class="empty">لا توجد تصاميم مطابقة.</div>';
-          return;
-        }
-
-        productsEl.innerHTML = items.map((item, i) => `
-          <article class="product">
-            <div class="product-image" data-open="${i}">
-              ${imgTag(item.src, item.fallback, item.name, 'loading="lazy"')}
-            </div>
-            <div class="product-info">
-              <h3>${item.name}</h3>
-              <div class="product-row">
-                <span class="price">${PRICE} جنيه / م²</span>
-                <a class="choose" href="./?design=${encodeURIComponent(item.name)}#calculator">اختيار التصميم</a>
-              </div>
-            </div>
-          </article>
-        `).join("");
+      const list = productsByCategory.get(category.id);
+      if (list) {
+        document.getElementById("designCount").textContent = list.length + " تصميم";
+        renderProducts(list);
+      } else {
+        document.getElementById("designCount").textContent = "جاري تحميل التصاميم...";
+        productsEl.innerHTML = '<div class="empty">جاري تحميل التصاميم والصور...</div>';
       }
-
-      render(list);
-
-      searchEl.addEventListener("input", () => {
-        const query = searchEl.value.trim().toLowerCase();
-        render(list.filter(item => item.name.toLowerCase().includes(query)));
-      });
-
-      /* ---- معاينة الصورة ---- */
-      const lightbox = document.getElementById("lightbox");
-      const lbImg = document.getElementById("lbImg");
-      let current = 0;
-
-      function openLightbox(i) {
-        current = (i + shown.length) % shown.length;
-        const item = shown[current];
-        lbImg.onerror = function () { lbImg.onerror = null; lbImg.src = item.fallback; };
-        lbImg.src = item.src;
-        lbImg.alt = item.name;
-        document.getElementById("lbName").textContent = item.name;
-        document.getElementById("lbChoose").href = "./?design=" + encodeURIComponent(item.name) + "#calculator";
-        lightbox.hidden = false;
-        document.body.style.overflow = "hidden";
-      }
-
-      function closeLightbox() {
-        lightbox.hidden = true;
-        document.body.style.overflow = "";
-      }
-
-      productsEl.addEventListener("click", event => {
-        const box = event.target.closest("[data-open]");
-        if (box) openLightbox(Number(box.dataset.open));
-      });
-
-      document.getElementById("lbClose").addEventListener("click", closeLightbox);
-      document.getElementById("lbPrev").addEventListener("click", () => openLightbox(current - 1));
-      document.getElementById("lbNext").addEventListener("click", () => openLightbox(current + 1));
-      lightbox.addEventListener("click", event => { if (event.target === lightbox) closeLightbox(); });
-
-      document.addEventListener("keydown", event => {
-        if (lightbox.hidden) return;
-        if (event.key === "Escape") closeLightbox();
-        if (event.key === "ArrowLeft") openLightbox(current + 1);
-        if (event.key === "ArrowRight") openLightbox(current - 1);
-      });
     }
 
-    const category = categories.find(item => item.id === params.get("category"));
-    if (category) showCategory(category);
+    async function loadAllCategories() {
+      await Promise.all(categories.map(async category => {
+        try {
+          const products = await fetchProducts(category);
+          productsByCategory.set(category.id, products);
+        } catch (error) {
+          console.warn("تعذر تحميل تصنيف " + category.id, error);
+          productsByCategory.set(category.id, []);
+        }
 
+        renderCategories();
+
+        if (activeCategory?.id === category.id) {
+          const products = productsByCategory.get(category.id) || [];
+          document.getElementById("designCount").textContent = products.length + " تصميم";
+          renderProducts(products);
+        }
+      }));
+    }
+
+    categoryGrid.addEventListener("click", event => {
+      const link = event.target.closest(".category-card");
+      if (!link) return;
+
+      const id = new URL(link.href).searchParams.get("category");
+      const category = categories.find(item => item.id === id);
+      if (!category) return;
+
+      event.preventDefault();
+      history.pushState({}, "", "?category=" + encodeURIComponent(category.id));
+      showCategory(category);
+    });
+
+    document.getElementById("chips").addEventListener("click", event => {
+      const link = event.target.closest(".chip");
+      if (!link) return;
+
+      const id = new URL(link.href).searchParams.get("category");
+      const category = categories.find(item => item.id === id);
+      if (!category) return;
+
+      event.preventDefault();
+      history.pushState({}, "", "?category=" + encodeURIComponent(category.id));
+      showCategory(category);
+    });
+
+    searchEl.addEventListener("input", () => {
+      if (!activeCategory) return;
+
+      const list = productsByCategory.get(activeCategory.id) || [];
+      const query = searchEl.value.trim().toLocaleLowerCase();
+      renderProducts(list.filter(item => item.name.toLocaleLowerCase().includes(query)));
+    });
+
+    function openLightbox(index) {
+      if (!visibleProducts.length) return;
+
+      lightboxIndex = (index + visibleProducts.length) % visibleProducts.length;
+      const item = visibleProducts[lightboxIndex];
+      const image = document.getElementById("lbImg");
+
+      image.onerror = function() {
+        image.onerror = null;
+        image.src = placeholderImage(item.name);
+      };
+      image.src = item.src || placeholderImage(item.name);
+      image.alt = item.name;
+      document.getElementById("lbName").textContent = item.name;
+      document.getElementById("lbChoose").href =
+        "./?design=" + encodeURIComponent(item.name) + "#calculator";
+
+      document.getElementById("lightbox").hidden = false;
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").hidden = true;
+      document.body.style.overflow = "";
+    }
+
+    productsEl.addEventListener("click", event => {
+      const imageBox = event.target.closest("[data-open]");
+      if (imageBox) openLightbox(Number(imageBox.dataset.open));
+    });
+
+    document.getElementById("lbClose").addEventListener("click", closeLightbox);
+    document.getElementById("lbPrev").addEventListener("click", () => openLightbox(lightboxIndex - 1));
+    document.getElementById("lbNext").addEventListener("click", () => openLightbox(lightboxIndex + 1));
+
+    document.getElementById("lightbox").addEventListener("click", event => {
+      if (event.target === event.currentTarget) closeLightbox();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (document.getElementById("lightbox").hidden) return;
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") openLightbox(lightboxIndex + 1);
+      if (event.key === "ArrowRight") openLightbox(lightboxIndex - 1);
+    });
+
+    window.addEventListener("popstate", () => {
+      const id = new URLSearchParams(location.search).get("category");
+      const category = categories.find(item => item.id === id);
+
+      if (category) {
+        showCategory(category);
+      } else {
+        page.hidden = true;
+        home.hidden = false;
+      }
+    });
+
+    const selectedDesign = params.get("design");
     if (selectedDesign) {
       document.getElementById("selectedDesign").textContent = selectedDesign;
     }
 
-    /* ---- الحاسبة ---- */
     function money(value) {
       return value.toLocaleString("ar-EG", { maximumFractionDigits:2 }) + " جنيه";
     }
@@ -572,22 +703,22 @@
       const area = width * height / 10000;
       const subtotal = area * PRICE;
       const discount = area > 5 ? subtotal * 0.05 : 0;
-      return { width, height, area, subtotal, discount, total: subtotal - discount };
+      return { width, height, area, subtotal, discount, total:subtotal - discount };
     }
 
     function updatePrice() {
-      const r = calc();
-      document.getElementById("area").textContent = r.area.toFixed(2) + " م²";
-      document.getElementById("subtotal").textContent = money(r.subtotal);
-      document.getElementById("discount").textContent = money(r.discount);
-      document.getElementById("total").textContent = money(r.total);
+      const result = calc();
+      document.getElementById("area").textContent = result.area.toFixed(2) + " م²";
+      document.getElementById("subtotal").textContent = money(result.subtotal);
+      document.getElementById("discount").textContent = money(result.discount);
+      document.getElementById("total").textContent = money(result.total);
     }
 
     document.getElementById("width").addEventListener("input", updatePrice);
     document.getElementById("height").addEventListener("input", updatePrice);
     updatePrice();
 
-    document.getElementById("roomImage").addEventListener("change", function () {
+    document.getElementById("roomImage").addEventListener("change", function() {
       const file = this.files && this.files[0];
       if (!file || !file.type.startsWith("image/")) return;
 
@@ -600,10 +731,10 @@
       reader.readAsDataURL(file);
     });
 
-    document.getElementById("orderBtn").addEventListener("click", function () {
-      const r = calc();
+    document.getElementById("orderBtn").addEventListener("click", () => {
+      const result = calc();
 
-      if (r.width <= 0 || r.height <= 0) {
+      if (result.width <= 0 || result.height <= 0) {
         alert("أدخل عرض وارتفاع الحائط أولًا.");
         return;
       }
@@ -611,16 +742,28 @@
       const message = [
         "مرحبًا X LINE، أريد الاستفسار عن طلب ورق حائط:",
         "التصميم: " + (selectedDesign || "لم أختَر تصميمًا بعد"),
-        "العرض: " + r.width + " سم",
-        "الارتفاع: " + r.height + " سم",
-        "المساحة: " + r.area.toFixed(2) + " م²",
-        "الإجمالي: " + r.total.toFixed(2) + " جنيه"
+        "العرض: " + result.width + " سم",
+        "الارتفاع: " + result.height + " سم",
+        "المساحة: " + result.area.toFixed(2) + " م²",
+        "الإجمالي: " + result.total.toFixed(2) + " جنيه"
       ].join("\n");
 
-      window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message), "_blank");
+      window.open(
+        "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message),
+        "_blank"
+      );
     });
 
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    renderCategories();
+
+    const requestedCategory = categories.find(
+      item => item.id === params.get("category")
+    );
+    if (requestedCategory) showCategory(requestedCategory);
+
+    loadAllCategories();
   </script>
 </body>
 </html>
