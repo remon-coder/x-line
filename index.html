@@ -37,348 +37,180 @@
     .container { width:min(1180px,calc(100% - 28px)); margin-inline:auto; }
 
     .nav {
-      position:sticky;
-      top:0;
-      z-index:20;
+      position:sticky; top:0; z-index:20;
       background:rgba(8,11,18,.94);
       backdrop-filter:blur(14px);
       border-bottom:1px solid var(--line);
     }
-
-    .nav-inner {
-      min-height:70px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-    }
-
-    .brand {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-size:21px;
-      font-weight:900;
-    }
-
+    .nav-inner { min-height:70px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { display:flex; align-items:center; gap:10px; font-size:21px; font-weight:900; }
     .brand-mark {
-      width:40px;
-      height:40px;
-      display:grid;
-      place-items:center;
-      border-radius:11px;
-      color:#06101c;
+      width:40px; height:40px; display:grid; place-items:center;
+      border-radius:11px; color:#06101c;
       background:linear-gradient(135deg,#72caff,#278fff);
     }
-
-    .nav-links {
-      display:flex;
-      gap:18px;
-      color:var(--muted);
-      font-size:14px;
-    }
+    .nav-links { display:flex; gap:18px; color:var(--muted); font-size:14px; }
+    .nav-links a:hover { color:var(--text); }
 
     .hero {
-      min-height:530px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      align-items:center;
-      gap:36px;
-      padding-block:48px;
+      min-height:530px; display:grid; grid-template-columns:1fr 1fr;
+      align-items:center; gap:36px; padding-block:48px;
     }
-
     .eyebrow {
-      display:inline-block;
-      margin-bottom:16px;
-      padding:9px 13px;
-      border:1px solid rgba(85,185,255,.25);
-      border-radius:30px;
-      color:var(--blue);
-      background:rgba(85,185,255,.08);
-      font-weight:800;
+      display:inline-block; margin-bottom:16px; padding:9px 13px;
+      border:1px solid rgba(85,185,255,.25); border-radius:30px;
+      color:var(--blue); background:rgba(85,185,255,.08); font-weight:800;
     }
-
-    h1 {
-      margin:0 0 16px;
-      font-size:clamp(40px,6vw,68px);
-      line-height:1.08;
-    }
-
+    h1 { margin:0 0 16px; font-size:clamp(40px,6vw,68px); line-height:1.08; }
     .blue { color:var(--blue); }
     .hero p { max-width:560px; color:var(--muted); line-height:1.8; font-size:17px; }
-
-    .price-line {
-      display:flex;
-      align-items:baseline;
-      gap:10px;
-      margin:22px 0;
-    }
-
+    .price-line { display:flex; align-items:baseline; gap:10px; margin:22px 0; }
     .price-line strong { font-size:30px; }
     .price-line span { color:var(--muted); }
-
     .actions { display:flex; flex-wrap:wrap; gap:10px; }
 
     .btn {
-      min-height:47px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:0 17px;
-      border:0;
-      border-radius:12px;
-      font-weight:800;
-      cursor:pointer;
+      min-height:47px; display:inline-flex; align-items:center; justify-content:center;
+      padding:0 17px; border:0; border-radius:12px; font-weight:800; cursor:pointer;
     }
-
     .primary { color:#06101c; background:linear-gradient(135deg,#72caff,#278fff); }
     .secondary { border:1px solid var(--line); background:var(--card); }
 
     .hero-image {
-      height:390px;
-      overflow:hidden;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:var(--card);
-      box-shadow:0 25px 70px rgba(0,0,0,.35);
+      height:390px; overflow:hidden; border:1px solid var(--line);
+      border-radius:22px; background:var(--card); box-shadow:0 25px 70px rgba(0,0,0,.35);
     }
-
     .hero-image img { height:100%; object-fit:cover; }
 
     .section { padding-block:48px; }
     .section h2 { margin:0 0 8px; font-size:clamp(28px,4vw,40px); }
     .section-description { margin:0 0 22px; color:var(--muted); }
 
-    .category-grid {
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-    }
-
+    /* ===== كروت الأصناف ===== */
+    .category-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
     .category-card {
-      position:relative;
-      height:180px;
-      overflow:hidden;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:var(--card);
+      position:relative; height:200px; overflow:hidden;
+      border:1px solid var(--line); border-radius:16px; background:var(--card); transition:.25s;
     }
-
-    .category-card img {
-      height:100%;
-      object-fit:cover;
-      transition:.35s;
-    }
-
+    .category-card:hover { border-color:rgba(85,185,255,.5); }
+    .category-card img { height:100%; object-fit:cover; transition:.35s; }
     .category-card:hover img { transform:scale(1.06); }
-
     .category-card::after {
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(transparent 20%,rgba(0,0,0,.88));
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(transparent 20%,rgba(0,0,0,.9));
     }
-
-    .category-card span {
-      position:absolute;
-      z-index:1;
-      right:14px;
-      bottom:12px;
-      font-size:17px;
-      font-weight:900;
+    .category-num {
+      position:absolute; z-index:1; top:12px; right:14px;
+      color:rgba(255,255,255,.75); font-size:13px; font-weight:800;
     }
+    .category-text { position:absolute; z-index:1; right:14px; left:14px; bottom:12px; }
+    .category-text strong { display:block; font-size:18px; font-weight:900; }
+    .category-text small { display:block; margin-top:3px; color:var(--blue); font-size:13px; font-weight:700; }
 
+    /* ===== صفحة الصنف ===== */
     .catalog-page { min-height:70vh; padding-block:38px 70px; }
-
-    .page-top {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:16px;
-      margin-bottom:22px;
-    }
-
+    .page-top { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:18px; }
     .page-top h1 { margin:0 0 7px; font-size:clamp(30px,5vw,44px); }
     .page-top p { margin:0; color:var(--muted); line-height:1.7; }
-
     .back {
-      min-height:42px;
-      display:inline-flex;
-      align-items:center;
-      padding:0 13px;
-      border:1px solid var(--line);
-      border-radius:10px;
-      background:var(--card);
-      white-space:nowrap;
+      min-height:42px; display:inline-flex; align-items:center; padding:0 13px;
+      border:1px solid var(--line); border-radius:10px; background:var(--card); white-space:nowrap;
     }
 
-    .panel {
-      padding:18px;
-      border:1px solid var(--line);
-      border-radius:20px;
-      background:rgba(17,23,34,.78);
+    .chips { display:flex; gap:8px; margin-bottom:20px; overflow-x:auto; padding-bottom:4px; }
+    .chip {
+      flex:0 0 auto; padding:8px 14px; border:1px solid var(--line); border-radius:30px;
+      background:var(--card); color:var(--muted); font-weight:700; font-size:14px;
     }
+    .chip:hover { color:var(--text); }
+    .chip.active { color:#06101c; background:var(--blue); border-color:var(--blue); }
 
-    .toolbar {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:14px;
-      margin-bottom:17px;
-    }
-
+    .panel { padding:18px; border:1px solid var(--line); border-radius:20px; background:rgba(17,23,34,.78); }
+    .toolbar { display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:17px; }
     .toolbar h2 { margin:0 0 5px; font-size:22px; }
     .toolbar p { margin:0; color:var(--muted); }
-
     .search {
-      width:min(300px,100%);
-      height:43px;
-      padding:0 12px;
-      border:1px solid var(--line);
-      border-radius:10px;
-      outline:none;
-      color:var(--text);
-      background:#0b1018;
+      width:min(300px,100%); height:43px; padding:0 12px;
+      border:1px solid var(--line); border-radius:10px; outline:none;
+      color:var(--text); background:#0b1018;
     }
-
     .search:focus { border-color:var(--blue); }
 
-    .products {
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:13px;
-    }
-
+    .products { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:13px; }
     .product {
-      overflow:hidden;
-      border:1px solid var(--line);
-      border-radius:15px;
-      background:var(--card);
-      transition:.25s;
+      overflow:hidden; border:1px solid var(--line); border-radius:15px;
+      background:var(--card); transition:.25s;
     }
-
     .product:hover { transform:translateY(-5px); border-color:rgba(85,185,255,.5); }
-
-    .product-image {
-      height:210px;
-      background:#182130;
-      overflow:hidden;
-    }
-
+    .product-image { height:230px; background:#182130; overflow:hidden; cursor:zoom-in; }
     .product-image img { height:100%; object-fit:cover; transition:.35s; }
     .product:hover img { transform:scale(1.05); }
-
     .product-info { padding:12px; }
     .product-info h3 { margin:0 0 11px; font-size:16px; }
-
-    .product-row {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:8px;
-    }
-
+    .product-row { display:flex; align-items:center; justify-content:space-between; gap:8px; }
     .price { color:var(--blue); font-weight:900; font-size:14px; }
-
     .choose {
-      min-height:36px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:0 10px;
-      border:1px solid rgba(85,185,255,.28);
-      border-radius:9px;
-      color:var(--blue);
-      background:rgba(85,185,255,.08);
-      white-space:nowrap;
+      min-height:36px; display:inline-flex; align-items:center; justify-content:center;
+      padding:0 10px; border:1px solid rgba(85,185,255,.28); border-radius:9px;
+      color:var(--blue); background:rgba(85,185,255,.08); white-space:nowrap;
     }
+    .choose:hover { background:rgba(85,185,255,.18); }
+    .empty { grid-column:1/-1; padding:24px; color:var(--muted); text-align:center; }
 
-    .empty {
-      grid-column:1/-1;
-      padding:24px;
-      color:var(--muted);
-      text-align:center;
+    /* ===== معاينة الصورة ===== */
+    .lightbox {
+      position:fixed; inset:0; z-index:50; display:grid; place-items:center;
+      padding:20px; background:rgba(4,6,10,.92);
     }
+    .lightbox figure { margin:0; max-width:min(900px,100%); }
+    .lightbox img { width:auto; max-width:100%; max-height:76vh; margin-inline:auto; border-radius:14px; }
+    .lightbox figcaption { margin-top:14px; text-align:center; font-weight:800; }
+    .lightbox figcaption a {
+      display:inline-block; margin-top:10px; padding:10px 16px; border-radius:10px;
+      color:#06101c; background:linear-gradient(135deg,#72caff,#278fff);
+    }
+    .lb-btn {
+      position:absolute; width:46px; height:46px; border:1px solid var(--line);
+      border-radius:50%; color:var(--text); background:rgba(17,23,34,.9);
+      font-size:20px; cursor:pointer;
+    }
+    .lb-close { top:16px; left:16px; }
+    .lb-prev { right:16px; top:50%; }
+    .lb-next { left:16px; top:50%; }
 
+    /* ===== الحاسبة وباقي الأقسام ===== */
     .calculator {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-      padding:18px;
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:var(--card);
+      display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:18px;
+      border:1px solid var(--line); border-radius:18px; background:var(--card);
     }
-
-    .fields {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    }
-
+    .fields { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .field label { display:block; margin-bottom:7px; color:var(--muted); }
     .field input {
-      width:100%;
-      height:46px;
-      padding:0 11px;
-      border:1px solid var(--line);
-      border-radius:9px;
-      color:var(--text);
-      background:#0b1018;
+      width:100%; height:46px; padding:0 11px; border:1px solid var(--line);
+      border-radius:9px; color:var(--text); background:#0b1018;
     }
-
     .summary {
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:13px;
-      background:#0a0e15;
+      display:flex; flex-direction:column; justify-content:space-between; padding:14px;
+      border:1px solid var(--line); border-radius:13px; background:#0a0e15;
     }
-
     .summary-row {
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      padding:9px 0;
-      border-bottom:1px solid var(--line);
-      color:var(--muted);
+      display:flex; justify-content:space-between; gap:10px; padding:9px 0;
+      border-bottom:1px solid var(--line); color:var(--muted);
     }
-
     .summary-row strong { color:var(--text); }
     .summary-row.total { border:0; color:var(--text); font-size:18px; font-weight:900; }
     .summary-row.total strong { color:var(--blue); font-size:23px; }
     .selected { margin:11px 0; color:var(--muted); }
     .selected strong { color:var(--blue); }
-
     .upload {
-      display:block;
-      margin-top:12px;
-      padding:16px;
-      border:1px dashed var(--blue);
-      border-radius:11px;
-      color:var(--muted);
-      text-align:center;
-      cursor:pointer;
+      display:block; margin-top:12px; padding:16px; border:1px dashed var(--blue);
+      border-radius:11px; color:var(--muted); text-align:center; cursor:pointer;
     }
-
     .upload input { display:none; }
     #preview { display:none; max-height:190px; margin-top:10px; border-radius:10px; object-fit:cover; }
 
-    .steps {
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
-    }
-
-    .step {
-      padding:16px;
-      border:1px solid var(--line);
-      border-radius:13px;
-      background:var(--card);
-    }
-
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+    .step { padding:16px; border:1px solid var(--line); border-radius:13px; background:var(--card); }
     .step h3 { margin:0 0 7px; }
     .step p { margin:0; color:var(--muted); line-height:1.7; }
 
@@ -391,18 +223,9 @@
     .footer-row { display:flex; justify-content:space-between; gap:15px; }
 
     .whatsapp {
-      position:fixed;
-      z-index:30;
-      left:17px;
-      bottom:17px;
-      width:54px;
-      height:54px;
-      display:grid;
-      place-items:center;
-      border-radius:50%;
-      color:white;
-      background:#20c86a;
-      font-size:22px;
+      position:fixed; z-index:30; left:17px; bottom:17px; width:54px; height:54px;
+      display:grid; place-items:center; border-radius:50%; color:white;
+      background:#20c86a; font-size:22px;
     }
 
     @media (max-width:850px) {
@@ -419,16 +242,18 @@
       .hero { min-height:auto; padding-block:34px; }
       .hero-image { height:250px; }
       .category-grid { grid-template-columns:repeat(2,1fr); gap:9px; }
-      .category-card { height:140px; }
+      .category-card { height:160px; }
       .toolbar,.page-top,.footer-row { align-items:stretch; flex-direction:column; }
       .search { width:100%; }
       .products { grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
-      .product-image { height:150px; }
+      .product-image { height:160px; }
       .product-info { padding:9px; }
       .product-row { align-items:stretch; flex-direction:column; }
       .choose { width:100%; }
       .panel { padding:11px; }
       .fields,.steps { grid-template-columns:1fr; }
+      .lb-prev { right:8px; }
+      .lb-next { left:8px; }
     }
   </style>
 </head>
@@ -446,6 +271,7 @@
     </div>
   </header>
 
+  <!-- ================= الصفحة الرئيسية ================= -->
   <main id="homeView">
     <section class="container hero">
       <div>
@@ -526,6 +352,7 @@
     </section>
   </main>
 
+  <!-- ================= صفحة الصنف ================= -->
   <main class="container catalog-page" id="categoryView" hidden>
     <div class="page-top">
       <div>
@@ -535,17 +362,33 @@
       <a class="back" href="./#categories">← الرجوع للأصناف</a>
     </div>
 
+    <div class="chips" id="chips"></div>
+
     <div class="panel">
       <div class="toolbar">
         <div>
           <h2 id="designCount">التصاميم</h2>
-          <p>اختَر التصميم الذي يعجبك.</p>
+          <p>اضغط على أي صورة لتكبيرها، أو اختَر التصميم مباشرة.</p>
         </div>
         <input class="search" id="search" type="search" placeholder="ابحث داخل الصنف...">
       </div>
       <div class="products" id="products"></div>
     </div>
   </main>
+
+  <!-- معاينة الصورة -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lb-btn lb-close" id="lbClose" aria-label="إغلاق">✕</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="السابق">›</button>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="التالي">‹</button>
+    <figure>
+      <img id="lbImg" src="" alt="">
+      <figcaption>
+        <span id="lbName"></span><br>
+        <a id="lbChoose" href="./#calculator">اختيار التصميم</a>
+      </figcaption>
+    </figure>
+  </div>
 
   <footer>
     <div class="container footer-row">
@@ -562,68 +405,63 @@
     const PRICE = 450;
     const WHATSAPP = "201208887256";
 
-    const imageIds = [
-      "photo-1618221195710-dd6b41faaea6",
-      "photo-1600607687939-ce8a6c25118c",
-      "photo-1600210492486-724fe5c67fb0",
-      "photo-1600607687920-4e2a09cf159d",
-      "photo-1600566753086-00f18fb6b3ea",
-      "photo-1616486338812-3dadae4b4ace",
-      "photo-1534796636912-3b95b3ab5986",
-      "photo-1446776811953-b23d57bd21aa",
-      "photo-1441974231531-c6227db76b6e",
-      "photo-1549490349-8643362247b5",
-      "photo-1470770841072-f978cf4d019e",
-      "photo-1470252649378-9c29740c9fa8",
-      "photo-1500530855697-b586d89ba3ee",
-      "photo-1464822759023-fed622ff2c3b",
-      "photo-1433086966358-54859d0ed716",
-      "photo-1497250681960-ef046c08a56e",
-      "photo-1501004318641-b39e6451bec6",
-      "photo-1487530811176-3780de880c2d",
-      "photo-1490750967868-88aa4486c946",
-      "photo-1513519245088-0e12902e5a38"
+    /* صور احتياطية بتظهر لو مفيش صورة محلية للتصميم */
+    const fallbackIds = [
+      "photo-1618221195710-dd6b41faaea6","photo-1600607687939-ce8a6c25118c",
+      "photo-1600210492486-724fe5c67fb0","photo-1600607687920-4e2a09cf159d",
+      "photo-1600566753086-00f18fb6b3ea","photo-1616486338812-3dadae4b4ace",
+      "photo-1534796636912-3b95b3ab5986","photo-1446776811953-b23d57bd21aa",
+      "photo-1441974231531-c6227db76b6e","photo-1549490349-8643362247b5",
+      "photo-1470770841072-f978cf4d019e","photo-1470252649378-9c29740c9fa8",
+      "photo-1500530855697-b586d89ba3ee","photo-1464822759023-fed622ff2c3b",
+      "photo-1433086966358-54859d0ed716","photo-1497250681960-ef046c08a56e",
+      "photo-1501004318641-b39e6451bec6","photo-1487530811176-3780de880c2d",
+      "photo-1490750967868-88aa4486c946","photo-1513519245088-0e12902e5a38"
     ];
 
+    /* الأصناف بنفس ترتيب Artehub */
     const categories = [
-      { id:"interior-panels", name:"Interior Panels", desc:"بانلز حائط بمظهر مرتب ومعاصر", offset:0, names:["Velour","Bravura","Celestia","Ornamenta","Walnera","Linear Luxe","LuxeCraft","Aurum","Eterna","Mahoro","Modern Rhythm","Soft Geometry"] },
-      { id:"calligraphy", name:"Calligraphy", desc:"تصميمات خط عربي وديكور شرقي", offset:3, names:["خط عربي ذهبي","نقوش شرقية","لمسة عربية","زخرفة كلاسيكية","فن شرقي أنيق","حروف عربية","لوحة خطية","نقش تراثي","خط ديواني","كلمات ملهمة","زخارف عربية","Calligraphy Luxe"] },
-      { id:"kids", name:"Kids", desc:"تصميمات مرحة ومبهجة لغرف الأطفال", offset:6, names:["Bubbly","Toyria","Playful Spots","Cheerio","Unicorn","عالم النجوم","مغامرات الفضاء","غابة الأحلام","ألوان مرحة","سماء بنفسجية","حيوانات الغابة","بالونات وأحلام"] },
-      { id:"mural", name:"Mural", desc:"مشاهد جدارية كبيرة للطبيعة والفن", offset:9, names:["غروب الجبال","وادي الطبيعة","قمم وضباب","غابة استوائية","شلال هادئ","حديقة خضراء","سماء وردية","طبيعة ساحرة","مشهد بحري","مدينة قديمة","أقواس معمارية","Mural Art"] },
-      { id:"marble", name:"Marble", desc:"رخام أنيق بلمسة فاخرة", offset:12, names:["رخام أبيض","رخام بعروق ذهبية","رخام رمادي","رخام فاخر","رخام هادئ","رخام أسود","رخام بيج","Calacatta","رخام كلاسيكي","رخام عصري","لمسات حجرية","Marble Luxe"] },
-      { id:"wood", name:"Wood", desc:"تصميمات خشب طبيعية وعصرية", offset:15, names:["خشب طبيعي","ألواح خشبية","خشب دافئ","خطوط خشبية","خشب عصري","خشب فاتح","خشب داكن","ألواح ريفية","خشب بلوط","خشب جوز","شرائح خشبية","Wood Luxe"] },
-      { id:"concrete", name:"Concrete", desc:"ستايل مودرن بملمس الخرسانة", offset:2, names:["خرسانة ناعمة","ملمس رمادي","ستايل صناعي","خرسانة عصرية","رمادي أنيق","إسمنت فاتح","إسمنت داكن","ملمس حجري","خرسانة دافئة","جدار صناعي","ستايل خام","Concrete Luxe"] },
-      { id:"leaves", name:"Leaves", desc:"أوراق ونباتات خضراء", offset:5, names:["أوراق استوائية","نباتات خضراء","أغصان طبيعية","حديقة هادئة","لمسات نباتية","أوراق مونستيرا","غابة استوائية","زهور وأوراق","نباتات داكنة","أوراق زيتونية","طبيعة ناعمة","Leaves Luxe"] }
+      { id:"interior-panels", name:"Interior Panels", tag:"بانلز", desc:"بانلز حائط بمظهر مرتب ومعاصر", offset:0, names:["Velour","Bravura","Celestia","Ornamenta","Walnera","Linear Luxe","LuxeCraft","Aurum","Eterna","Mahoro","Modern Rhythm","Soft Geometry"] },
+      { id:"calligraphy", name:"Calligraphy", tag:"خط عربي", desc:"تصميمات خط عربي وديكور شرقي", offset:3, names:["خط عربي ذهبي","نقوش شرقية","لمسة عربية","زخرفة كلاسيكية","فن شرقي أنيق","حروف عربية","لوحة خطية","نقش تراثي","خط ديواني","كلمات ملهمة","زخارف عربية","Calligraphy Luxe"] },
+      { id:"kids", name:"Kids", tag:"Kids", desc:"تصميمات مرحة ومبهجة لغرف الأطفال", offset:6, names:["Bubbly","Toyria","Playful Spots","Cheerio","Unicorn","عالم النجوم","مغامرات الفضاء","غابة الأحلام","ألوان مرحة","سماء بنفسجية","حيوانات الغابة","بالونات وأحلام"] },
+      { id:"mural", name:"Mural", tag:"Mural", desc:"مشاهد جدارية كبيرة للطبيعة والفن", offset:9, names:["غروب الجبال","وادي الطبيعة","قمم وضباب","غابة استوائية","شلال هادئ","حديقة خضراء","سماء وردية","طبيعة ساحرة","مشهد بحري","مدينة قديمة","أقواس معمارية","Mural Art"] },
+      { id:"leaves", name:"Leaves", tag:"Leaves", desc:"أوراق ونباتات خضراء", offset:5, names:["أوراق استوائية","نباتات خضراء","أغصان طبيعية","حديقة هادئة","لمسات نباتية","أوراق مونستيرا","غابة استوائية","زهور وأوراق","نباتات داكنة","أوراق زيتونية","طبيعة ناعمة","Leaves Luxe"] },
+      { id:"concrete", name:"Concrete", tag:"Concrete", desc:"ستايل مودرن بملمس الخرسانة", offset:2, names:["خرسانة ناعمة","ملمس رمادي","ستايل صناعي","خرسانة عصرية","رمادي أنيق","إسمنت فاتح","إسمنت داكن","ملمس حجري","خرسانة دافئة","جدار صناعي","ستايل خام","Concrete Luxe"] },
+      { id:"wood", name:"Wood", tag:"Wood", desc:"تصميمات خشب طبيعية وعصرية", offset:15, names:["خشب طبيعي","ألواح خشبية","خشب دافئ","خطوط خشبية","خشب عصري","خشب فاتح","خشب داكن","ألواح ريفية","خشب بلوط","خشب جوز","شرائح خشبية","Wood Luxe"] },
+      { id:"marble", name:"Marble", tag:"Marble", desc:"رخام أنيق بلمسة فاخرة", offset:12, names:["رخام أبيض","رخام بعروق ذهبية","رخام رمادي","رخام فاخر","رخام هادئ","رخام أسود","رخام بيج","Calacatta","رخام كلاسيكي","رخام عصري","لمسات حجرية","Marble Luxe"] }
     ];
 
-    function photo(id,width=900) {
-      return "https://images.unsplash.com/" + id +
-        "?auto=format&fit=crop&w=" + width + "&q=82";
+    /* الصورة المحلية: images/<id>/<رقم>.jpg — وصورة الغلاف: images/<id>/cover.jpg */
+    function fallbackPhoto(category, index, width) {
+      const id = fallbackIds[(category.offset + index) % fallbackIds.length];
+      return "https://images.unsplash.com/" + id + "?auto=format&fit=crop&w=" + width + "&q=82";
     }
 
-    function categoryImage(category,index) {
-      return photo(imageIds[(category.offset+index)%imageIds.length],900);
+    function imgTag(src, fallback, alt, extra) {
+      return '<img src="' + src + '" alt="' + alt + '" ' + (extra || "") +
+        ' onerror="this.onerror=null;this.src=\'' + fallback + '\'">';
     }
 
-    function productImage(category,index) {
-      return photo(imageIds[(category.offset+index+2)%imageIds.length],850);
-    }
-
-    const grid = document.getElementById("categoryGrid");
+    const params = new URLSearchParams(location.search);
     const home = document.getElementById("homeView");
     const page = document.getElementById("categoryView");
     const productsEl = document.getElementById("products");
     const searchEl = document.getElementById("search");
-    const params = new URLSearchParams(location.search);
-    let selectedDesign = params.get("design") || "";
+    const selectedDesign = params.get("design") || "";
 
-    grid.innerHTML = categories.map((category,index) => `
+    /* ---- كروت الأصناف ---- */
+    document.getElementById("categoryGrid").innerHTML = categories.map((category, index) => `
       <a class="category-card" href="?category=${encodeURIComponent(category.id)}">
-        <img src="${categoryImage(category,index)}" alt="${category.name}" loading="lazy">
-        <span>${category.name} ←</span>
+        ${imgTag("images/" + category.id + "/cover.jpg", fallbackPhoto(category, 0, 900), category.name, 'loading="lazy"')}
+        <span class="category-num">${String(index + 1).padStart(2, "0")}</span>
+        <div class="category-text">
+          <strong>${category.name}</strong>
+          <small>${category.tag} ←</small>
+        </div>
       </a>
     `).join("");
 
+    /* ---- صفحة الصنف ---- */
     function showCategory(category) {
       home.hidden = true;
       page.hidden = false;
@@ -632,26 +470,36 @@
       document.getElementById("categoryDescription").textContent = category.desc;
       document.getElementById("designCount").textContent = category.names.length + " تصميم";
 
-      const list = category.names.map((name,index) => ({
+      document.getElementById("chips").innerHTML = categories.map(item => `
+        <a class="chip ${item.id === category.id ? "active" : ""}"
+           href="?category=${encodeURIComponent(item.id)}">${item.name}</a>
+      `).join("");
+
+      const list = category.names.map((name, index) => ({
         name,
-        image:productImage(category,index)
+        src: "images/" + category.id + "/" + (index + 1) + ".jpg",
+        fallback: fallbackPhoto(category, index + 2, 1000)
       }));
 
+      let shown = list;
+
       function render(items) {
+        shown = items;
+
         if (!items.length) {
           productsEl.innerHTML = '<div class="empty">لا توجد تصاميم مطابقة.</div>';
           return;
         }
 
-        productsEl.innerHTML = items.map(item => `
+        productsEl.innerHTML = items.map((item, i) => `
           <article class="product">
-            <div class="product-image">
-              <img src="${item.image}" alt="${item.name}" loading="lazy">
+            <div class="product-image" data-open="${i}">
+              ${imgTag(item.src, item.fallback, item.name, 'loading="lazy"')}
             </div>
             <div class="product-info">
               <h3>${item.name}</h3>
               <div class="product-row">
-                <span class="price">450 جنيه / م²</span>
+                <span class="price">${PRICE} جنيه / م²</span>
                 <a class="choose" href="./?design=${encodeURIComponent(item.name)}#calculator">اختيار التصميم</a>
               </div>
             </div>
@@ -665,6 +513,45 @@
         const query = searchEl.value.trim().toLowerCase();
         render(list.filter(item => item.name.toLowerCase().includes(query)));
       });
+
+      /* ---- معاينة الصورة ---- */
+      const lightbox = document.getElementById("lightbox");
+      const lbImg = document.getElementById("lbImg");
+      let current = 0;
+
+      function openLightbox(i) {
+        current = (i + shown.length) % shown.length;
+        const item = shown[current];
+        lbImg.onerror = function () { lbImg.onerror = null; lbImg.src = item.fallback; };
+        lbImg.src = item.src;
+        lbImg.alt = item.name;
+        document.getElementById("lbName").textContent = item.name;
+        document.getElementById("lbChoose").href = "./?design=" + encodeURIComponent(item.name) + "#calculator";
+        lightbox.hidden = false;
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        lightbox.hidden = true;
+        document.body.style.overflow = "";
+      }
+
+      productsEl.addEventListener("click", event => {
+        const box = event.target.closest("[data-open]");
+        if (box) openLightbox(Number(box.dataset.open));
+      });
+
+      document.getElementById("lbClose").addEventListener("click", closeLightbox);
+      document.getElementById("lbPrev").addEventListener("click", () => openLightbox(current - 1));
+      document.getElementById("lbNext").addEventListener("click", () => openLightbox(current + 1));
+      lightbox.addEventListener("click", event => { if (event.target === lightbox) closeLightbox(); });
+
+      document.addEventListener("keydown", event => {
+        if (lightbox.hidden) return;
+        if (event.key === "Escape") closeLightbox();
+        if (event.key === "ArrowLeft") openLightbox(current + 1);
+        if (event.key === "ArrowRight") openLightbox(current - 1);
+      });
     }
 
     const category = categories.find(item => item.id === params.get("category"));
@@ -674,65 +561,66 @@
       document.getElementById("selectedDesign").textContent = selectedDesign;
     }
 
+    /* ---- الحاسبة ---- */
     function money(value) {
-      return value.toLocaleString("ar-EG",{maximumFractionDigits:2}) + " جنيه";
+      return value.toLocaleString("ar-EG", { maximumFractionDigits:2 }) + " جنيه";
+    }
+
+    function calc() {
+      const width = Math.max(0, Number(document.getElementById("width").value) || 0);
+      const height = Math.max(0, Number(document.getElementById("height").value) || 0);
+      const area = width * height / 10000;
+      const subtotal = area * PRICE;
+      const discount = area > 5 ? subtotal * 0.05 : 0;
+      return { width, height, area, subtotal, discount, total: subtotal - discount };
     }
 
     function updatePrice() {
-      const width = Math.max(0,Number(document.getElementById("width").value)||0);
-      const height = Math.max(0,Number(document.getElementById("height").value)||0);
-      const area = width*height/10000;
-      const subtotal = area*PRICE;
-      const discount = area>5?subtotal*.05:0;
-
-      document.getElementById("area").textContent = area.toFixed(2)+" م²";
-      document.getElementById("subtotal").textContent = money(subtotal);
-      document.getElementById("discount").textContent = money(discount);
-      document.getElementById("total").textContent = money(subtotal-discount);
+      const r = calc();
+      document.getElementById("area").textContent = r.area.toFixed(2) + " م²";
+      document.getElementById("subtotal").textContent = money(r.subtotal);
+      document.getElementById("discount").textContent = money(r.discount);
+      document.getElementById("total").textContent = money(r.total);
     }
 
-    document.getElementById("width").addEventListener("input",updatePrice);
-    document.getElementById("height").addEventListener("input",updatePrice);
+    document.getElementById("width").addEventListener("input", updatePrice);
+    document.getElementById("height").addEventListener("input", updatePrice);
     updatePrice();
 
-    document.getElementById("roomImage").addEventListener("change",function(){
-      const file=this.files&&this.files[0];
-      if(!file||!file.type.startsWith("image/")) return;
+    document.getElementById("roomImage").addEventListener("change", function () {
+      const file = this.files && this.files[0];
+      if (!file || !file.type.startsWith("image/")) return;
 
-      const reader=new FileReader();
-      reader.onload=event=>{
-        const preview=document.getElementById("preview");
-        preview.src=event.target.result;
-        preview.style.display="block";
+      const reader = new FileReader();
+      reader.onload = event => {
+        const preview = document.getElementById("preview");
+        preview.src = event.target.result;
+        preview.style.display = "block";
       };
       reader.readAsDataURL(file);
     });
 
-    document.getElementById("orderBtn").addEventListener("click",function(){
-      const width=Number(document.getElementById("width").value)||0;
-      const height=Number(document.getElementById("height").value)||0;
+    document.getElementById("orderBtn").addEventListener("click", function () {
+      const r = calc();
 
-      if(width<=0||height<=0){
+      if (r.width <= 0 || r.height <= 0) {
         alert("أدخل عرض وارتفاع الحائط أولًا.");
         return;
       }
 
-      const area=width*height/10000;
-      const subtotal=area*PRICE;
-      const discount=area>5?subtotal*.05:0;
-      const message=[
+      const message = [
         "مرحبًا X LINE، أريد الاستفسار عن طلب ورق حائط:",
-        "التصميم: "+(selectedDesign||"لم أختَر تصميمًا بعد"),
-        "العرض: "+width+" سم",
-        "الارتفاع: "+height+" سم",
-        "المساحة: "+area.toFixed(2)+" م²",
-        "الإجمالي: "+(subtotal-discount).toFixed(2)+" جنيه"
+        "التصميم: " + (selectedDesign || "لم أختَر تصميمًا بعد"),
+        "العرض: " + r.width + " سم",
+        "الارتفاع: " + r.height + " سم",
+        "المساحة: " + r.area.toFixed(2) + " م²",
+        "الإجمالي: " + r.total.toFixed(2) + " جنيه"
       ].join("\n");
 
-      window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(message),"_blank");
+      window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message), "_blank");
     });
 
-    document.getElementById("year").textContent=new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
